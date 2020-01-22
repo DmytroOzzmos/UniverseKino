@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.WEB", "UniverseKino.WEB\UniverseKino.WEB\UniverseKino.WEB.csproj", "{AF43C422-E868-4F0C-AE35-04B09D2A9233}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.Services", "UniverseKino.Services\UniverseKino.Services\UniverseKino.Services.csproj", "{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.Data", "UniverseKino.Data\UniverseKino.Data.csproj", "{35675189-FA60-46B8-BFF8-EEE3718CC00B}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
