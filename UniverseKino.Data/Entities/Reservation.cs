@@ -5,11 +5,8 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class Reservation
+    public class Reservation : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Number { get; set; }
 

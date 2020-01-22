@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using UniverseKino.Data.Entities;
+
+namespace UniverseKino.Data.Interfaces
+{
+    public interface IUnitOfWorkEntities
+    {
+        IGenericRepository<Movie> Movies { get; }
+        IGenericRepository<CinemaHall> CinemaHalls { get; }
+        IGenericRepository<Session> Sessions { get; set; }
+        IGenericRepository<Reservation> Reservations { get; }
+
+        void Save();
+    }
+}
