@@ -5,7 +5,7 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    class ApplicationUser : IdentityUser
+    public class AppIdentityUser : IdentityUser
     {
     }
 }
