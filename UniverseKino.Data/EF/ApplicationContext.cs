@@ -9,13 +9,5 @@ namespace UniverseKino.Data.EF
         public IdentityContext(string conectionString) : base(conectionString) { }
 
         public DbSet<ClientProfile> ClientProfiles { get; set; }
-
-        public DbSet<Movie> Movies { get; set; }
-
-        public DbSet<CinemaHall> CinemaHalls { get; set; }
-
-        public DbSet<Session> Sessions { get; set; }
-
-        public DbSet<Reservation> Reservations { get; set; }
     }
 }
