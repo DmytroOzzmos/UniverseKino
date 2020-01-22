@@ -1,11 +1,12 @@
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.Identity
 {
-    public class IdentityUserManager : UserManager<AppIdentityUser>
+    public class ApplicationUserManager : UserManager<ApplicationUser>
     {
-        public IdentityUserManager(IUserStore<AppIdentityUser> store)
+        public ApplicationUserManager(UserStore<ApplicationUser> store)
                 : base(store)
         {
         }

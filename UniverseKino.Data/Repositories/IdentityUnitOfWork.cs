@@ -1,6 +1,9 @@
+
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using UniverseKino.Data.EF;
+using UniverseKino.Data.Entities;
 using UniverseKino.Data.Identity;
 using UniverseKino.Data.Interfaces;
 
@@ -8,20 +11,19 @@ namespace UniverseKino.Data.Repositories
 {
     public class IdentityUnitOfWork : IUnitOfWork
     {
-        private IdentityContext db;
 
-        private IdentityUserManager userManager;
-        private IdentityRoleManager roleManager;
+        private ApplicationContext db;
+
+        private ApplicationUserManager userManager;
+        private ApplicationRoleManager roleManager;
         private IClientManager clientManager;
-
         public IdentityUnitOfWork(string connectionString)
         {
-            db = new IdentityContext(connectionString);
-            userManager = new IdentityUserManager(new UserStore<AppIdentityUser>(db));
-            roleManager = new IdentityRoleManager(new RoleStore<IdentityRole>(db));
+            db = new ApplicationContext(connectionString);
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
             clientManager = new ClientManager(db);
         }
-
         public ApplicationUserManager UserManager
         {
             get { return userManager; }
@@ -32,14 +34,10 @@ namespace UniverseKino.Data.Repositories
             get { return clientManager; }
         }
 
-        public IdentityRoleManager RoleManager
+        public ApplicationRoleManager RoleManager
         {
             get { return roleManager; }
         }
-
-        IdentityUserManager IUnitOfWork.UserManager => throw new System.NotImplementedException();
-
-        IdentityRoleManager IUnitOfWork.RoleManager => throw new System.NotImplementedException();
 
         public async Task SaveAsync()
         {

@@ -5,7 +5,9 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class AppIdentityUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
+        public virtual ClientProfile ClientProfile { get; set; }
+
     }
 }

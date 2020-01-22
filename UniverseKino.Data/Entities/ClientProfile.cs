@@ -15,6 +15,6 @@ namespace UniverseKino.Data.Entities
         public string Name { get; set; }
         public string Address { get; set; }
 
-        public virtual AppIdentityUser ApplicationUser { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

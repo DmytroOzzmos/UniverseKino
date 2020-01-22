@@ -4,9 +4,9 @@ using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.Identity
 {
-    public class IdentityRoleManager : RoleManager<AppIdentityRole>
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
-        public IdentityRoleManager(RoleStore<AppIdentityRole> store)
+        public ApplicationRoleManager(RoleStore<ApplicationRole> store)
                     : base(store)
         { }
     }

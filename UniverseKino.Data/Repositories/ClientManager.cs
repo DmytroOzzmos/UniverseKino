@@ -6,8 +6,8 @@ namespace UniverseKino.Data.Repositories
 {
     public class ClientManager : IClientManager
     {
-        public IdentityContext Database { get; set; }
-        public ClientManager(IdentityContext db)
+        public ApplicationContext Database { get; set; }
+        public ClientManager(ApplicationContext db)
         {
             Database = db;
         }
