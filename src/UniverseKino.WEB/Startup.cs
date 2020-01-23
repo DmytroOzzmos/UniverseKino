@@ -27,9 +27,17 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
-            app.
-            app.UseMvc();
-            
+            app.UseRouting();
+            app.UseCors();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
