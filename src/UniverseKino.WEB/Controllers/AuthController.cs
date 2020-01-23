@@ -14,8 +14,8 @@ namespace UniverseKino.WEB.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthService _authServ;
-        //private IMapper _mapper; 
-        public AuthController(IAuthService authServ)
+        private IMapper _mapper;
+        public AuthController(IAuthService authServ, IMapper mapper)
         {
             _authServ = authServ;
             //_mapper = mapper;

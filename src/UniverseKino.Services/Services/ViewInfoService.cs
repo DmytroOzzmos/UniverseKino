@@ -21,14 +21,18 @@ namespace UniverseKino.Services.Services
         {
             var movies = uow.Movies.GetAll();
 
-
+            //map
 
             return null;
         }
 
         public List<SessionDTO> GetSessions()
         {
-            throw new NotImplementedException();
+            var sessions = uow.Sessions.GetAll().OrderBy(x => x.Date);
+
+            //map
+
+            return null;
         }
     }
 }
