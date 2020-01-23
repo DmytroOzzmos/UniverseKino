@@ -1,6 +1,7 @@
 namespace UniverseKino.WEB.Models
 {
-    public class TokenResponseVies
+  
+    public class TokenResponseDTO
     {
         public string Token { get; set; }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Services;
@@ -14,16 +15,19 @@ namespace UniverseKino.WEB.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthService _authServ;
-        public AuthController(IAuthService authServ)
+        private IMapper _mapper;
+        public AuthController(IAuthService authServ, IMapper mapper)
         {
             _authServ = authServ;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [Route("Registration")]
-        public async Task<IActionResult> Registration([FromBody] RegistrationRequestDTO data)
+        public async Task<IActionResult> Registration([FromBody] RegistrationRequestView data)
         {
-            var token = await _authServ.Register(data.Email, data.Password);
+            var RegisterServiceDTO = _mapper.Map<RegistrationRequestDTO>(data);
+            var token = await _authServ.Register(RegisterServiceDTO);
 
             if (token == null)
             {
@@ -41,9 +45,10 @@ namespace UniverseKino.WEB.Controllers
 
         [HttpPost]
         [Route("Authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody] LoginRequestDTO data)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequestView data)
         {
-            var token = await _authServ.Authenticate(data.Email, data.Password);
+            var serviceModel = _mapper.Map<LoginRequestDTO>(data);
+            var token = await _authServ.Authenticate(serviceModel);
 
             if (token == null)
             {
