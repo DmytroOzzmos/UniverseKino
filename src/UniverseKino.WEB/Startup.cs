@@ -27,7 +27,9 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
-            //app.UseMvc();
+            app.
+            app.UseMvc();
+            
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -57,7 +59,7 @@ namespace UniverseKino.WEB
             //    container.Resolve(mapProfile);
             //}
         }
-            
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Use extensions from libraries to register services in the

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Services;
 using UniverseKino.WEB.Models;
-using AutoMapper;
 
 namespace UniverseKino.WEB.Controllers
 {
@@ -16,7 +15,7 @@ namespace UniverseKino.WEB.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthService _authServ;
-        private IMapper _mapper; 
+        private IMapper _mapper;
         public AuthController(IAuthService authServ, IMapper mapper)
         {
             _authServ = authServ;
