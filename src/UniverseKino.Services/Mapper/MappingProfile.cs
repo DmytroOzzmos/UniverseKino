@@ -7,7 +7,7 @@ using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Services
 {
-    public class MappingProfile : Profile, IMapperProfile
+    public class MappingProfile : MapperProfileConfig
     {
         public MappingProfile()
         {

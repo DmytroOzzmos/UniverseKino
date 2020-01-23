@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
@@ -7,25 +10,17 @@ using UniverseKino.Data.EF;
 
 namespace UniverseKino.Services
 {
-    public class ServicesModule : Module
+    public class ServicesModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            var mappingConfig = new MapperConfiguration(mc =>
-               {
-                   mc.AddProfile(new MappingProfile());
-               });
 
 
-            var a = new MappingProfile();
             builder.RegisterModule<DataModule>();
 
             builder.Register(x =>
-            new AuthService(x.Resolve<ApplicationContext>(),
-                mappingConfig.CreateMapper())
-                )
-                .As<IAuthService>()
-            .InstancePerDependency();
+            new AuthService(x.Resolve<ApplicationContext>()))
+                .As<IAuthService>();
 
 
         }

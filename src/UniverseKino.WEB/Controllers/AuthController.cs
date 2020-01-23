@@ -15,10 +15,15 @@ namespace UniverseKino.WEB.Controllers
     {
         private IAuthService _authServ;
         private IMapper _mapper;
-        public AuthController(IAuthService authServ, IMapper mapper)
+        public AuthController(IAuthService authServ)
         {
             _authServ = authServ;
-            _mapper = mapper;
+
+            _mapper = new MapperConfiguration(mc =>
+             {
+                 mc.AddProfile(new MappingProfile());
+             })
+             .CreateMapper();
         }
 
         [HttpPost]
@@ -33,20 +38,14 @@ namespace UniverseKino.WEB.Controllers
                 return BadRequest();
             }
 
-            else
-                return Ok(
-                    new TokenResponseView
-                    {
-                        Token = token.Token
-                    }
-                    );
+            return Ok(token);
         }
 
         [HttpPost]
         [Route("Authenticate")]
         public async Task<IActionResult> Authenticate(LoginRequestView data)
         {
-            var serviceModel = new LoginRequestDTO(); /*_mapper.Map<LoginRequestDTO>(data);*/
+            var serviceModel = _mapper.Map<LoginRequestDTO>(data);
             var token = await _authServ.Authenticate(serviceModel);
 
             if (token == null)
@@ -54,13 +53,7 @@ namespace UniverseKino.WEB.Controllers
                 return BadRequest();
             }
 
-            else
-                return Ok(
-                    new
-                    {
-                        Token = token
-                    }
-                    );
+            return Ok(token);
         }
     }
 }

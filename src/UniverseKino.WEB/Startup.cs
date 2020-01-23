@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,12 @@ using System.Collections.Generic;
 using System.IO;
 using UniverseKino.Core;
 using AutoMapper;
+using UniverseKino.Services;
+
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
+using AutoMapper.Configuration;
 
 namespace UniverseKino.WEB
 {
@@ -30,7 +37,7 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
-            
+
             app.UseRouting();
             app.UseCors();
 
@@ -40,7 +47,7 @@ namespace UniverseKino.WEB
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                // endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
         }
@@ -53,17 +60,13 @@ namespace UniverseKino.WEB
             //
             // You must have the call to AddAutofac in the Program.Main
             // method or this won't be called.
+            // var mapper = new MapperConfiguration(mc => { })
+            //     .CreateMapper();
+            // builder.RegisterInstance(mapper)
+            //     .As<IMapper>();
+            //IMapperConfigurationExpression 
+
             builder.RegisterModule(new ControllersModule());
-
-            var list = new List<Type>();
-            foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMapperProfile))))
-            {
-                builder.RegisterType(mytype);
-
-                list.Add(mytype);
-            }
-
 
         }
 
@@ -79,7 +82,24 @@ namespace UniverseKino.WEB
             services.AddControllers();
             services.AddControllersWithViews();
 
-            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            var key = Encoding.ASCII.GetBytes("THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING");
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
         }
     }
 }

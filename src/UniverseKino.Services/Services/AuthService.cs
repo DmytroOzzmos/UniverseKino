@@ -8,6 +8,9 @@ using UniverseKino.Data.Entities;
 using UniverseKino.WEB.Models;
 using System;
 using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace UniverseKino.Services
 {
@@ -15,15 +18,40 @@ namespace UniverseKino.Services
     {
         private ApplicationContext _appContext;
         private IMapper _mapper;
-        public AuthService(ApplicationContext appContext, IMapper mapper)
+        public AuthService(ApplicationContext appContext)
         {
-            _mapper = mapper;
+            _mapper = new MapperConfiguration(mc =>
+              {
+                  mc.AddProfile(new MappingProfile());
+              })
+              .CreateMapper();
             _appContext = appContext;
         }
 
         public Task<TokenResponseDTO> Authenticate(LoginRequestDTO data)
         {
-            throw new System.NotImplementedException();
+            var users = _appContext.ApplicationUsers.ToList();
+            var user = _appContext.ApplicationUsers.Where(u => u.Email == data.Email).FirstOrDefault();
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING")); //AppSettings.GetSymmetricAuthSecretKey();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(
+                 new Claim[] {
+                new Claim (ClaimsIdentity.DefaultNameClaimType, user.Username),
+                new Claim (ClaimsIdentity.DefaultRoleClaimType, user.Role),
+                 },
+                 "Token",
+                 ClaimsIdentity.DefaultNameClaimType,
+                 ClaimsIdentity.DefaultRoleClaimType
+                 ),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return Task.Run(() => new TokenResponseDTO { Token = tokenHandler.WriteToken(token) });
         }
 
         // public async Task<OperationDetails> Create(UserDTO userDto)
