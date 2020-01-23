@@ -5,7 +5,7 @@ using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.Interfaces
 {
-    public interface IUnitOfWorkEntities
+    public interface IUnitOfWorkEntities : IDisposable
     {
         IGenericRepository<Movie> Movies { get; }
         IGenericRepository<CinemaHall> CinemaHalls { get; }
