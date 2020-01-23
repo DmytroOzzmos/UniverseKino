@@ -41,23 +41,23 @@ namespace UniverseKino.WEB
 
             builder.RegisterModule(new ControllersModule());
 
-            var list = new List<Type>();
-            foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMapperProfile))))
-            {
-                builder.RegisterType(mytype);
+            //var list = new List<Type>();
+            //foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+            //    .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMapperProfile))))
+            //{
+            //    builder.RegisterType(mytype);
 
-                list.Add(mytype);
-            }
+            //    list.Add(mytype);
+            //}
 
-            var container = builder.Build();
+            //var container = builder.Build();
 
-            foreach (var mapProfile in list)
-            {
-                container.Resolve(mapProfile);
-            }
+            //foreach (var mapProfile in list)
+            //{
+            //    container.Resolve(mapProfile);
+            //}
         }
-
+            
         public void ConfigureServices(IServiceCollection services)
         {
             // Use extensions from libraries to register services in the
