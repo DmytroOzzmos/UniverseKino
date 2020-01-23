@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
-using UniverseKino.Data.Identity;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Data.EF;
 
@@ -18,9 +17,9 @@ namespace UniverseKino.Data.Repositories
         private IGenericRepository<Session> sessions;
         private IGenericRepository<Reservation> reservations;
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork(UniverseKinoContext dbContext)
         {
-            dbContext = new UniverseKinoContext(connectionString);
+            this.dbContext = dbContext;
         }
 
         public IGenericRepository<Movie> Movies

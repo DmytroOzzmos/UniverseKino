@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Text;
 using UniverseKino.Data.Entities;
 
@@ -16,6 +16,10 @@ namespace UniverseKino.Data.EF
 
         public DbSet<Reservation> Reservations { get; set; }
 
-        public UniverseKinoContext(string connectionString) : base(connectionString) { }
+        public UniverseKinoContext(DbContextOptions<UniverseKinoContext> options)
+                    : base(options)
+        {
+            Database.EnsureCreated();
+        }
     }
 }

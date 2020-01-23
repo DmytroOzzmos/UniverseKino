@@ -5,7 +5,7 @@ using UniverseKino.Data.Entities;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Data.EF;
 using System.Linq;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace UniverseKino.Data.Repositories
 {

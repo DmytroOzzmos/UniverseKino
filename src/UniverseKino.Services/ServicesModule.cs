@@ -10,13 +10,12 @@ namespace UniverseKino.Services
         protected override void Load(ContainerBuilder builder)
         {
 
-            
             builder.RegisterModule<DataModule>();
 
             builder.Register(c => new AuthService(c.Resolve<ApplicationContext>()))
                 .As<IAuthService>()
                 //.InstancePerLifetimeScope();
-                .InstancePerLifetimeTransient();
+                .InstancePerLifetimeScope();
 
         }
 
