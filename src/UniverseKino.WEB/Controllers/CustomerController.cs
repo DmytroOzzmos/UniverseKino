@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UniverseKino.WEB.View;
 
 namespace UniverseKino.WEB
 {
@@ -13,11 +14,6 @@ namespace UniverseKino.WEB
     [Authorize]
     public class CustomerController : ControllerBase
     {
-
-        /// <summary>
-        /// можно троечку,пожалуйста))Ц
-        /// </summary>
-        
         [HttpGet("schedule")]
         public async  Task<IActionResult> GetAllSessions()
         {
@@ -31,7 +27,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpPost("sessions/tobook")]
-        public async  Task<IActionResult> ToBook ([FromBody] BookRequestModel places)
+        public async  Task<IActionResult> ToBook ([FromBody] ReservationRequestModel places)
         {
             return await Task.Run( () => Ok());
         }
@@ -54,17 +50,4 @@ namespace UniverseKino.WEB
             return await Task.Run( () => Ok());
         }
     }
-    
-    public class BookRequestModel
-    {
-        public int SessionsId { get; set; }
-        public List<Place> PlacesToBook { get; set; }
-    }
-
-    public class Place
-    {
-        public int NumberSeat { get; set; }
-        public int NumberRow { get; set; }
-    }
-    
 }

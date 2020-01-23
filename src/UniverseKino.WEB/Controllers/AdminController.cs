@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using UniverseKino.WEB.View;
 
 namespace UniverseKino.WEB
 {
@@ -39,20 +38,5 @@ namespace UniverseKino.WEB
         {
             return Ok();
         }
-    }
-
-
-    public class CreateSessionRequestModel
-    {
-        public DateTime Date { get; set; }
-        public int NumberHall { get; set; }
-        public string NameMovie { get; set; }
-    }
-
-    public class CreateMovieRequestModel
-    {
-        public string Name { get; set; }
-        public string Genre { get; set; }
-        public int Duration { get; set; }
     }
 }
