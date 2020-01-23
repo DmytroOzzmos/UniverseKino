@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+using Autofac.Extensions.DependencyInjection;
+//using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 
 namespace UniverseKino.WEB
 {
@@ -21,6 +22,7 @@ namespace UniverseKino.WEB
                 .Build();
 
             host.Run();
+
         }
 
     }

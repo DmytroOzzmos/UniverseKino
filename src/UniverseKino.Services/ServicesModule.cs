@@ -14,8 +14,8 @@ namespace UniverseKino.Services
 
             builder.Register(c => new AuthService(c.Resolve<ApplicationContext>()))
                 .As<IAuthService>()
-                //.InstancePerLifetimeScope();
-                .InstancePerLifetimeScope();
+            .InstancePerDependency();
+
 
         }
 

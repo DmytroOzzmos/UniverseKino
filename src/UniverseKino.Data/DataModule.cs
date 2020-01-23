@@ -40,10 +40,14 @@ namespace UniverseKino.Data
             // builder.Register(c => new ApplicationContext(appContext.Options))
             //     .InstancePerDependency();
 
-            builder.RegisterInstance(dbContext).As<UniverseKinoContext>();
+            //builder.RegisterInstance(dbContext).As<UniverseKinoContext>();
 
-            // builder.Register(c => new UniverseKinoContext(dbContext.Options))
-            // .InstancePerDependency();
+            builder.Register(c => new UniverseKinoContext(
+                 new DbContextOptionsBuilder<UniverseKinoContext>()
+                .UseSqlServer(connString)
+                .Options
+                ))
+            .InstancePerDependency();
 
             builder.Register(u => new UnitOfWork(u.Resolve<UniverseKinoContext>()))
             .As<IUnitOfWorkEntities>()

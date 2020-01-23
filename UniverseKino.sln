@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Services", "src\UniverseKino.Services\UniverseKino.Services.csproj", "{984A2119-F072-40F9-89DA-81829B0F2608}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Data", "src\UniverseKino.Data\UniverseKino.Data.csproj", "{E65E1282-9FA8-463C-A10B-34CDDFC93319}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BA6AE1C-B525-410B-92AE-4BB3B44A5AFC} = {2BA6AE1C-B525-410B-92AE-4BB3B44A5AFC}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Core", "src\UniverseKino.Core\UniverseKino.Core.csproj", "{2BA6AE1C-B525-410B-92AE-4BB3B44A5AFC}"
 EndProject
