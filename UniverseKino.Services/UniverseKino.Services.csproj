@@ -1,11 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\UniverseKino.Data\UniverseKino.Data.csproj" />
+    <None Remove="AuthService.cs~RF174e55d.TMP" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniverseKino.Data\UniverseKino.Data.csproj" />
+  </ItemGroup>
 </Project>

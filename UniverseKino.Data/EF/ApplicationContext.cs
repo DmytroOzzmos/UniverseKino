@@ -1,13 +1,17 @@
-using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.EF
 {
-    public class ApplicationContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationContext : DbContext
     {
-        public ApplicationContext(string conectionString) : base(conectionString) { }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
-        public DbSet<ClientProfile> ClientProfiles { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

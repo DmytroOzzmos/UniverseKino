@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.WEB", "UniverseKino.WEB\UniverseKino.WEB\UniverseKino.WEB.csproj", "{AF43C422-E868-4F0C-AE35-04B09D2A9233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Web", "UniverseKino.Web\UniverseKino.Web.csproj", "{23E9D714-1FAB-4227-808E-C4735F438816}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.Services", "UniverseKino.Services\UniverseKino.Services\UniverseKino.Services.csproj", "{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Services", "UniverseKino.Services\UniverseKino.Services.csproj", "{DE44960A-546F-4127-9069-0ADFE71853EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.Data", "UniverseKino.Data\UniverseKino.Data.csproj", "{35675189-FA60-46B8-BFF8-EEE3718CC00B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniverseKino.Data", "UniverseKino.Data\UniverseKino.Data.csproj", "{1F258BD2-69F2-4D98-9BD1-3F7DC02F9223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniverseKino.Core", "UniverseKino.Core\UniverseKino.Core.csproj", "{8BB250A8-6CF2-4379-9CBC-149EE0FE7ED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF43C422-E868-4F0C-AE35-04B09D2A9233}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69B62135-E4E3-4505-9DA5-EE8450BEDE3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35675189-FA60-46B8-BFF8-EEE3718CC00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E9D714-1FAB-4227-808E-C4735F438816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E9D714-1FAB-4227-808E-C4735F438816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E9D714-1FAB-4227-808E-C4735F438816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E9D714-1FAB-4227-808E-C4735F438816}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE44960A-546F-4127-9069-0ADFE71853EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE44960A-546F-4127-9069-0ADFE71853EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE44960A-546F-4127-9069-0ADFE71853EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE44960A-546F-4127-9069-0ADFE71853EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F258BD2-69F2-4D98-9BD1-3F7DC02F9223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F258BD2-69F2-4D98-9BD1-3F7DC02F9223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F258BD2-69F2-4D98-9BD1-3F7DC02F9223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F258BD2-69F2-4D98-9BD1-3F7DC02F9223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB250A8-6CF2-4379-9CBC-149EE0FE7ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB250A8-6CF2-4379-9CBC-149EE0FE7ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB250A8-6CF2-4379-9CBC-149EE0FE7ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB250A8-6CF2-4379-9CBC-149EE0FE7ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
