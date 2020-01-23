@@ -5,8 +5,9 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser  : BaseEntity
     {
+        public string Email { get; set; }
         public string Role { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

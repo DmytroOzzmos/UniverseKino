@@ -5,6 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UniverseKino.Core;
 
 namespace UniverseKino.WEB
 {
@@ -23,7 +27,7 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseMvc();
+            //app.UseMvc();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -34,7 +38,24 @@ namespace UniverseKino.WEB
             //
             // You must have the call to AddAutofac in the Program.Main
             // method or this won't be called.
+
             builder.RegisterModule(new ControllersModule());
+
+            var list = new List<Type>();
+            foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMapperProfile))))
+            {
+                builder.RegisterType(mytype);
+
+                list.Add(mytype);
+            }
+
+            var container = builder.Build();
+
+            foreach (var mapProfile in list)
+            {
+                container.Resolve(mapProfile);
+            }
         }
 
         public void ConfigureServices(IServiceCollection services)

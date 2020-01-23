@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using UniverseKino.Data.EF;
 using UniverseKino.Data.Entities;
+using UniverseKino.WEB.Models;
 
 namespace UniverseKino.Services
 {
@@ -15,8 +16,8 @@ namespace UniverseKino.Services
         {
             _appContext = appContext;
         }
-
-        public ApplicationUser Authenticate(string username, string password)
+        
+        public Task<TokenResponseDTO> Authenticate(LoginRequestDTO data)
         {
             throw new System.NotImplementedException();
         }
@@ -81,9 +82,11 @@ namespace UniverseKino.Services
             throw new System.NotImplementedException();
         }
 
-        public ApplicationUser Register(UserDTO newUser)
+        public Task<TokenResponseDTO> Register(RegistrationRequestDTO data)
         {
             throw new System.NotImplementedException();
         }
+
+        
     }
 }

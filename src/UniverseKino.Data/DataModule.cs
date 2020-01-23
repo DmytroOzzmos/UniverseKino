@@ -49,6 +49,7 @@ namespace UniverseKino.Data
             .As<IUnitOfWorkEntities>()
             .InstancePerDependency();
 
+
         }
 
     }
