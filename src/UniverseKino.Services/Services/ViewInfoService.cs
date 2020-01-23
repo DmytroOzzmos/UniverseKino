@@ -4,6 +4,7 @@ using System.Text;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
 using UniverseKino.Data.Interfaces;
+using System.Linq;
 
 namespace UniverseKino.Services.Services
 {
@@ -11,14 +12,17 @@ namespace UniverseKino.Services.Services
     {
         private readonly IUnitOfWorkEntities uow;
 
-        public ViewInfoService()
+        public ViewInfoService(IUnitOfWorkEntities uow)
         {
-
+            this.uow = uow;
         }
 
         public List<MovieDTO> GetMovies()
         {
-            //var movies = 
+            var movies = uow.Movies.GetAll();
+
+
+
             return null;
         }
 

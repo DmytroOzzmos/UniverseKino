@@ -24,12 +24,17 @@ namespace UniverseKino.Data.Repositories
             this.dbContext = dbContext;
         }
 
+        private IGenericRepository<T> GetRepository<T>()  where T : BaseEntity
+        {
+            return GetRepository<T>();
+        }
+
         public IGenericRepository<Movie> Movies
         {
             get
             {
                 if (movies == null)
-                    movies = new GenericRepository<Movie>(dbContext);
+                    movies = GetRepository<Movie>();
 
                 return movies;
             }
@@ -40,7 +45,7 @@ namespace UniverseKino.Data.Repositories
             get
             {
                 if (cinemaHalls == null)
-                    cinemaHalls = new GenericRepository<CinemaHall>(dbContext);
+                    cinemaHalls = GetRepository<CinemaHall>();
 
                 return cinemaHalls;
             }
@@ -51,7 +56,7 @@ namespace UniverseKino.Data.Repositories
             get
             {
                 if (seats == null)
-                    seats = new GenericRepository<Seat>(dbContext);
+                    seats = GetRepository<Seat>();
 
                 return seats;
             }
@@ -62,7 +67,7 @@ namespace UniverseKino.Data.Repositories
             get
             {
                 if (sessions == null)
-                    sessions = new GenericRepository<Session>(dbContext);
+                    sessions = GetRepository<Session>();
 
                 return sessions;
             }
@@ -73,7 +78,7 @@ namespace UniverseKino.Data.Repositories
             get
             {
                 if (reservations == null)
-                    reservations = new GenericRepository<Reservation>(dbContext);
+                    reservations = GetRepository<Reservation>();
 
                 return reservations;
             }
