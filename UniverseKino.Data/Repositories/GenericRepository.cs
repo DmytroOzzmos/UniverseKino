@@ -21,9 +21,9 @@ namespace UniverseKino.Data.Repositories
             }
         }
 
-        public GenericRepository(string connectionString)
+        public GenericRepository(UniverseKinoContext dbContext)
         {
-            dbContext = new UniverseKinoContext(connectionString);
+            this.dbContext = dbContext;
         }
 
         public void Add(TEntity entity)
