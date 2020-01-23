@@ -3,40 +3,63 @@ using System.Collections.Generic;
 using System.Text;
 using UniverseKino.Data.Entities;
 using UniverseKino.Data.Interfaces;
+using UniverseKino.Data.EF;
+using System.Linq;
+using System.Data.Entity;
 
 namespace UniverseKino.Data.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        private readonly  dbContext;
+        private readonly UniverseKinoContext dbContext;
+
+        private DbSet<TEntity> Entities
+        {
+            get
+            {
+                return dbContext.Set<TEntity>();
+            }
+        }
+
+        public GenericRepository(string connectionString)
+        {
+            dbContext = new UniverseKinoContext(connectionString);
+        }
+
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            Entities.Add(entity);
         }
 
         public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         {
-            throw new NotImplementedException();
+            var listResult = Entities.Where(predicate);
+
+            return listResult;
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return Entities;
         }
 
         public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            var entity = Entities.Where(x => x.Id == id).FirstOrDefault();
+
+            return entity;
         }
 
-        public void Remove(TEntity entity)
+        public void Remove(int id)
         {
-            throw new NotImplementedException();
+            var removeEntity = GetById(id);
+
+            Entities.Remove(removeEntity);
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }
