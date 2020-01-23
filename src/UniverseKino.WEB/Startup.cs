@@ -42,7 +42,6 @@ namespace UniverseKino.WEB
             // Use extensions from libraries to register services in the
             // collection. These will be automatically added to the
             // Autofac container.
-            services.AddDbContext()
             //
             // Note if you have this method return an IServiceProvider
             // then ConfigureContainer will not be called.

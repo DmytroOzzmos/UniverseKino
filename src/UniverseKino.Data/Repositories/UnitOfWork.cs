@@ -19,9 +19,9 @@ namespace UniverseKino.Data.Repositories
         private IGenericRepository<Reservation> reservations;
         private IGenericRepository<Seat> seats;
 
-        public UnitOfWork(DbContextOptions options)
+        public UnitOfWork(UniverseKinoContext dbContext)
         {
-            dbContext = new UniverseKinoContext(options);
+            this.dbContext = dbContext;
         }
 
         public IGenericRepository<Movie> Movies
