@@ -9,7 +9,7 @@ namespace UniverseKino.Data.Interfaces
     {
         IGenericRepository<Movie> Movies { get; }
         IGenericRepository<CinemaHall> CinemaHalls { get; }
-        IGenericRepository<Session> Sessions { get; set; }
+        IGenericRepository<Session> Sessions { get; }
         IGenericRepository<Reservation> Reservations { get; }
 
         void Save();

@@ -5,40 +5,91 @@ using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
 using UniverseKino.Data.Identity;
 using UniverseKino.Data.Interfaces;
+using UniverseKino.Data.EF;
 
 namespace UniverseKino.Data.Repositories
 {
-    public class UnitOfWork : IUnitOfWorkEntities
+    public class UnitOfWork : IUnitOfWorkEntities, IDisposable
     {
-        private readonly 
+        private readonly UniverseKinoContext dbContext;
 
-        public UnitOfWork()
+        private IGenericRepository<Movie> movies;
+        private IGenericRepository<CinemaHall> cinemaHalls;
+        private IGenericRepository<Session> sessions;
+        private IGenericRepository<Reservation> reservations;
+
+        public UnitOfWork(string connectionString)
         {
-
+            dbContext = new UniverseKinoContext(connectionString);
         }
 
         public IGenericRepository<Movie> Movies
         {
             get
             {
+                if (movies == null)
+                    movies = new GenericRepository<Movie>(dbContext);
 
+                return movies;
             }
         }
 
-        public IGenericRepository<CinemaHall> CinemaHalls => throw new NotImplementedException();
+        public IGenericRepository<CinemaHall> CinemaHalls
+        {
+            get
+            {
+                if (cinemaHalls == null)
+                    cinemaHalls = new GenericRepository<CinemaHall>(dbContext);
 
-        public IGenericRepository<Session> Sessions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+                return cinemaHalls;
+            }
+        }
 
-        public IGenericRepository<Reservation> Reservations => throw new NotImplementedException();
+        public IGenericRepository<Session> Sessions
+        {
+            get
+            {
+                if (sessions == null)
+                    sessions = new GenericRepository<Session>(dbContext);
+
+                return sessions;
+            }
+        }
+
+        public IGenericRepository<Reservation> Reservations
+        {
+            get
+            {
+                if (reservations == null)
+                    reservations = new GenericRepository<Reservation>(dbContext);
+
+                return reservations;
+            }
+        }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
+                disposed = true;
+            }
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            dbContext.SaveChanges();
         }
     }
 }
