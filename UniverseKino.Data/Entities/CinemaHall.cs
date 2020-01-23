@@ -10,8 +10,7 @@ namespace UniverseKino.Data.Entities
         [Required]
         public int Number { get; set; }
 
-        [Required]
-        public int CountSeats { get; set; }
+        public List<Seat> Seats { get; set; }
 
         public List<Session> Sessions { get; set; }
     }

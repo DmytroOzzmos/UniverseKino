@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.EF
@@ -11,11 +8,12 @@ namespace UniverseKino.Data.EF
         public DbSet<Movie> Movies { get; set; }
 
         public DbSet<CinemaHall> CinemaHalls { get; set; }
+        public DbSet<Seat> Seats { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
 
         public DbSet<Reservation> Reservations { get; set; }
 
-        public UniverseKinoContext(string connectionString) : base(connectionString) { }
+        public UniverseKinoContext(DbContextOptions options) : base(options) { }
     }
 }

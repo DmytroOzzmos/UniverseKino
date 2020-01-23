@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
-using UniverseKino.Data.Identity;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Data.EF;
+using Microsoft.EntityFrameworkCore;
 
 namespace UniverseKino.Data.Repositories
 {
@@ -17,10 +17,11 @@ namespace UniverseKino.Data.Repositories
         private IGenericRepository<CinemaHall> cinemaHalls;
         private IGenericRepository<Session> sessions;
         private IGenericRepository<Reservation> reservations;
+        private IGenericRepository<Seat> seats;
 
-        public UnitOfWork(string connectionString)
+        public UnitOfWork(DbContextOptions options)
         {
-            dbContext = new UniverseKinoContext(connectionString);
+            dbContext = new UniverseKinoContext(options);
         }
 
         public IGenericRepository<Movie> Movies
@@ -42,6 +43,17 @@ namespace UniverseKino.Data.Repositories
                     cinemaHalls = new GenericRepository<CinemaHall>(dbContext);
 
                 return cinemaHalls;
+            }
+        }
+
+        public IGenericRepository<Seat> Seats
+        {
+            get
+            {
+                if (seats == null)
+                    seats = new GenericRepository<Seat>(dbContext);
+
+                return seats;
             }
         }
 
