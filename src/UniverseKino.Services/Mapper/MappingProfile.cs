@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Net.Mime;
+using AutoMapper;
 using System;
 using UniverseKino.Core;
 using UniverseKino.Services;
+using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Services
 {
@@ -9,7 +11,7 @@ namespace UniverseKino.Services
     {
         public MappingProfile()
         {
-            //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
+            CreateMap<RegistrationRequestDTO, ApplicationUser>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
             //CreateMap<CreateLotDTO, Lot>();

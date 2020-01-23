@@ -18,14 +18,14 @@ namespace UniverseKino.WEB.Controllers
         public AuthController(IAuthService authServ, IMapper mapper)
         {
             _authServ = authServ;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
         [HttpPost]
         [Route("Registration")]
         public async Task<IActionResult> Registration([FromBody] RegistrationRequestView data)
         {
-            var RegisterServiceDTO = new RegistrationRequestDTO();/*_mapper.Map<RegistrationRequestDTO>(data);*/
+            var RegisterServiceDTO = _mapper.Map<RegistrationRequestDTO>(data);
             var token = await _authServ.Register(RegisterServiceDTO);
 
             if (token == null)
@@ -35,9 +35,9 @@ namespace UniverseKino.WEB.Controllers
 
             else
                 return Ok(
-                    new
+                    new TokenResponseView
                     {
-                        Token = token
+                        Token = token.Token
                     }
                     );
         }

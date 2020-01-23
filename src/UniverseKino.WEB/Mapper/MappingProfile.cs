@@ -12,6 +12,7 @@ namespace UniverseKino.WEB
         {
 
             CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
+            // .ForMember(x => x.Email, opt => opt.MapFrom(x1 => x1.UserName));
             CreateMap<TokenResponseView, TokenResponseDTO>();
             CreateMap<LoginRequestView, LoginRequestDTO>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();

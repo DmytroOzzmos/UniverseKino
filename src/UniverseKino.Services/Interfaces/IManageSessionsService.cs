@@ -7,6 +7,6 @@ namespace UniverseKino.Services.Interfaces
 {
     public interface IManageSessionsService
     {
-        void Add(SessionDTO )
+        // void Add(SessionDTO )
     }
 }

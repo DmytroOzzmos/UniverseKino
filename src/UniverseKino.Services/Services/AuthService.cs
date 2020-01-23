@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 using UniverseKino.Data.EF;
 using UniverseKino.Data.Entities;
 using UniverseKino.WEB.Models;
+using System;
+using AutoMapper;
 
 namespace UniverseKino.Services
 {
     public class AuthService : IAuthService
     {
         private ApplicationContext _appContext;
-        public AuthService(ApplicationContext appContext)
+        private IMapper _mapper;
+        public AuthService(ApplicationContext appContext, IMapper mapper)
         {
+            _mapper = mapper;
             _appContext = appContext;
         }
-        
+
         public Task<TokenResponseDTO> Authenticate(LoginRequestDTO data)
         {
             throw new System.NotImplementedException();
@@ -84,9 +88,27 @@ namespace UniverseKino.Services
 
         public Task<TokenResponseDTO> Register(RegistrationRequestDTO data)
         {
-            throw new System.NotImplementedException();
+            var user = _appContext.ApplicationUsers.Where(u => u.Email == data.Email).FirstOrDefault();
+
+            if (user != null)
+            {
+                throw new Exception();
+            }
+
+            var newUser = _mapper.Map<ApplicationUser>(data);
+
+            newUser.Role = "User";
+
+            _appContext.ApplicationUsers.Add(newUser);
+            _appContext.SaveChangesAsync();
+
+            return
+             Task.Run(() => new TokenResponseDTO
+             {
+                 Token = newUser.Username
+             });
         }
 
-        
+
     }
 }

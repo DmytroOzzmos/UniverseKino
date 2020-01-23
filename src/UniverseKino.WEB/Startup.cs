@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.IO;
 using UniverseKino.Core;
+using AutoMapper;
 
 namespace UniverseKino.WEB
 {
@@ -29,6 +30,7 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
+            
             app.UseRouting();
             app.UseCors();
 
@@ -52,6 +54,17 @@ namespace UniverseKino.WEB
             // You must have the call to AddAutofac in the Program.Main
             // method or this won't be called.
             builder.RegisterModule(new ControllersModule());
+
+            var list = new List<Type>();
+            foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
+                .Where(mytype => mytype.GetInterfaces().Contains(typeof(IMapperProfile))))
+            {
+                builder.RegisterType(mytype);
+
+                list.Add(mytype);
+            }
+
+
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -62,6 +75,7 @@ namespace UniverseKino.WEB
             //
             // Note if you have this method return an IServiceProvider
             // then ConfigureContainer will not be called.
+
             services.AddControllers();
             services.AddControllersWithViews();
 
