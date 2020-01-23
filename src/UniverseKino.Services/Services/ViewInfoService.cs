@@ -17,6 +17,11 @@ namespace UniverseKino.Services.Services
             this.uow = uow;
         }
 
+        public MovieDTO GetMovie(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<MovieDTO> GetMovies()
         {
             var movies = uow.Movies.GetAll();
@@ -24,6 +29,11 @@ namespace UniverseKino.Services.Services
             //map
 
             return null;
+        }
+
+        public SessionDTO GetSession(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<SessionDTO> GetSessions()

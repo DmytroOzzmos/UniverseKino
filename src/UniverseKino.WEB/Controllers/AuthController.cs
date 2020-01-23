@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Services;
 using UniverseKino.WEB.Models;
 
-namespace UniverseKino.WEB.Controllers
+namespace UniverseKino.WEB
 {
     [Route("api/[controller]")]
     [ApiController]
