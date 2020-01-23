@@ -16,10 +16,39 @@ namespace UniverseKino.Services
             _appContext = appContext;
         }
 
-        public ApplicationUser Authenticate(string username, string password)
+        public async Task<string> Authenticate(string username, string password)
         {
-            throw new System.NotImplementedException();
+            var user = await Task.Run(() =>
+                    _appContext
+                   .ApplicationUsers
+                   .Where(user => user.Username == username
+                   && user.Password == password)
+                   .FirstOrDefault()
+            );
+
+            return "";
         }
+
+        public async Task<string> Register(string email, string password)
+        {
+
+            var user = await Task.Run(() =>
+                    _appContext
+                   .ApplicationUsers
+                   .Where(user => user.Email == email)
+                   .FirstOrDefault()
+            );
+
+            return "";
+
+        }
+
+        // public async Task<string> Register(UserDTO userDTO)
+        // {
+        //     ApplicationUser user = await _appContext.ApplicationUsers.Where(user => user.Email == userDTO.Email);
+
+        //     return "";
+        // }
 
         // public async Task<OperationDetails> Create(UserDTO userDto)
         // {
@@ -81,9 +110,11 @@ namespace UniverseKino.Services
             throw new System.NotImplementedException();
         }
 
-        public ApplicationUser Register(UserDTO newUser)
+        public string Register(UserDTO newUser)
         {
-            throw new System.NotImplementedException();
+            return "";
         }
+
+
     }
 }

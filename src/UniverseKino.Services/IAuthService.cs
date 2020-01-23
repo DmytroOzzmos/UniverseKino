@@ -7,8 +7,8 @@ namespace UniverseKino.Services
 {
     public interface IAuthService
     {
-        ApplicationUser Register(UserDTO newUser);
-        ApplicationUser Authenticate(string username, string password);
+        Task<string> Register(string email, string password);
+        Task<string> Authenticate(string username, string password);
         IEnumerable<ApplicationUser> GetAll();
         // Task<OperationDetails> Create(UserDTO userDto);
         // Task<ClaimsIdentity> Authenticate(UserDTO userDto);
