@@ -10,6 +10,10 @@ namespace UniverseKino.Services.Dto
 
         public string NameMovie { get; set; }
 
+        public string GenreMovie { get; set; }
+
+        public int DurationMovie { get; set; }
+
         public int NumberHall { get; set; }
     }
 }
