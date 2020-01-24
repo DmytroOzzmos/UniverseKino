@@ -10,7 +10,7 @@ namespace UniverseKino.WEB
     [ApiController]
     public class InformationController : ControllerBase
     {
-        [HttpGet("schedule")]
+        [HttpGet("sessions/all")]
         public async Task<IActionResult> GetAllSessions()
         {
             return await Task.Run(() => Ok("Go to the nahuy"));
