@@ -11,7 +11,7 @@ namespace UniverseKino.WEB
 {
     [Route("customer")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CustomerController : ControllerBase
     {
         [HttpGet("schedule")]
@@ -27,7 +27,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpPost("sessions/tobook")]
-        public async  Task<IActionResult> ToBook ([FromBody] ReservationRequestModel places)
+        public async  Task<IActionResult> ToBook([FromBody] ReservationRequestModel places)
         {
             return await Task.Run( () => Ok());
         }
@@ -39,7 +39,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpGet("movies/{id}")]
-        public async  Task<IActionResult> GetSMovie([FromQuery] int id)
+        public async  Task<IActionResult> GetMovie([FromQuery] int id)
         {
             return await Task.Run( () => Ok());
         }
