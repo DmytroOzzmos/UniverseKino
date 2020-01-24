@@ -8,9 +8,9 @@ using UniverseKino.Services.Dto;
 
 namespace UniverseKino.Services
 {
-    public class MappingProfile : MapperProfileConfig
+    public class ServicesMappingProfile : Profile
     {
-        public MappingProfile()
+        public ServicesMappingProfile()
         {
             CreateMap<RegistrationRequestDTO, ApplicationUser>()
                 .ForMember(x => x.Role, opt => opt.MapFrom(y => "User"));

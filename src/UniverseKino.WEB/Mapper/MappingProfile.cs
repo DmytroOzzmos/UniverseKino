@@ -1,6 +1,5 @@
-﻿using AutoMapper;
-using System;
-using UniverseKino.Core;
+﻿using Autofac;
+using AutoMapper;
 using UniverseKino.Services;
 using UniverseKino.WEB.Models;
 
@@ -18,5 +17,13 @@ namespace UniverseKino.WEB
         }
 
 
+    }
+
+    public static class MappExtension
+    {
+        // public static void RegisterMapper(this ContainerBuilder builder, MappingProfile profile, ServiceMappingProfile servProfile)
+        // {
+
+        // }
     }
 }

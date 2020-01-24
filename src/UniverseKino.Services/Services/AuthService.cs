@@ -28,13 +28,9 @@ namespace UniverseKino.Services
         private JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         private PasswordHasher _hasher;
 
-        public AuthService(AuthRepository userRepo, IOptionsMonitor<JWTHelper> jwt, PasswordHasher hasher)
+        public AuthService(AuthRepository userRepo, IOptionsMonitor<JWTHelper> jwt, PasswordHasher hasher, IMapper mapper)
         {
-            _mapper = new MapperConfiguration(mc =>
-              {
-                  mc.AddProfile(new MappingProfile());
-              })
-              .CreateMapper();
+            _mapper = mapper;
             _jwt = jwt.CurrentValue;
             _userRepo = userRepo;
             _hasher = hasher;

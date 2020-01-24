@@ -15,15 +15,17 @@ namespace UniverseKino.WEB
     {
         private IAuthService _authServ;
         private IMapper _mapper;
-        public AuthController(IAuthService authServ)
+        public AuthController(IAuthService authServ, IMapper mapper)
         {
             _authServ = authServ;
 
-            _mapper = new MapperConfiguration(mc =>
-             {
-                 mc.AddProfile(new MappingProfile());
-             })
-             .CreateMapper();
+            // _mapper = new MapperConfiguration(mc =>
+            //  {
+            //      mc.AddProfile(new MappingProfile());
+            //  })
+            //  .CreateMapper();
+
+            _mapper = mapper;
         }
 
         [HttpPost]

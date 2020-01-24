@@ -77,8 +77,7 @@ namespace UniverseKino.WEB
             // Autofac container.
             //
             // Note if you have this method return an IServiceProvider
-            // then ConfigureContainer will not be called.
-
+            // then ConfigureContainer will not be 
             services.AddControllers();
             services.AddControllersWithViews();
             services.Configure<JWTHelper>(Configuration);
