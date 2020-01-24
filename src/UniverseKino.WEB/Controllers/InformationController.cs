@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace UniverseKino.WEB.Controllers
+namespace UniverseKino.WEB
 {
     [Route("info")]
     [ApiController]
