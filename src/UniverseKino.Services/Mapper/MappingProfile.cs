@@ -12,7 +12,12 @@ namespace UniverseKino.Services
     {
         public MappingProfile()
         {
-            CreateMap<RegistrationRequestDTO, ApplicationUser>();
+            CreateMap<RegistrationRequestDTO, ApplicationUser>()
+                .ForMember(x => x.Role, opt => opt.MapFrom(y => "User"));
+            // .ForMember(x => x.Role, opt => opt.MapFrom(y => "User"));
+
+
+            CreateMap<ApplicationUser, RegistrationRequestDTO>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
             //CreateMap<CreateLotDTO, Lot>();
@@ -21,10 +26,10 @@ namespace UniverseKino.Services
             CreateMap<SeatDTO, Seat>();
             CreateMap<SessionDTO, Session>()
                 .ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
-                //.ForMember(a => a.Movie.Genre, opt => opt.MapFrom(b => b.GenreMovie))
-                //.ForMember(a => a.Movie.Duration, opt => opt.MapFrom(b => b.DurationMovie))
-                //.ForMember(a => a.CinemaHall.Number, opt => opt.MapFrom(b => b.NumberHall))
-                //.ForMember(a => a.CinemaHall.Seats, opt => opt.MapFrom(b => b.Seats));
+            //.ForMember(a => a.Movie.Genre, opt => opt.MapFrom(b => b.GenreMovie))
+            //.ForMember(a => a.Movie.Duration, opt => opt.MapFrom(b => b.DurationMovie))
+            //.ForMember(a => a.CinemaHall.Number, opt => opt.MapFrom(b => b.NumberHall))
+            //.ForMember(a => a.CinemaHall.Seats, opt => opt.MapFrom(b => b.Seats));
         }
     }
 }

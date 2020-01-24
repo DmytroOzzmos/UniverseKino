@@ -17,10 +17,10 @@ namespace UniverseKino.Services
 
 
             builder.RegisterModule<DataModule>();
-
-            builder.Register(x =>
-            new AuthService(x.Resolve<ApplicationContext>()))
-                .As<IAuthService>();
+            builder.RegisterType<AuthService>().As<IAuthService>();
+            // builder.Register(x =>
+            // new AuthService(x.Resolve<ApplicationContext>()))
+            //     .As<IAuthService>();
 
 
         }

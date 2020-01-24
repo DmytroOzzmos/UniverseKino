@@ -49,6 +49,8 @@ namespace UniverseKino.Data
                 ))
             .InstancePerDependency();
 
+            builder.Register(r => new AuthRepository(r.Resolve<ApplicationContext>()));
+
             builder.Register(u => new UnitOfWork(u.Resolve<UniverseKinoContext>()))
             .As<IUnitOfWorkEntities>()
             .InstancePerDependency();
