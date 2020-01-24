@@ -5,44 +5,56 @@ using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
 using UniverseKino.Data.Interfaces;
 using System.Linq;
+using AutoMapper;
+using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Services.Services
 {
     public class ViewInfoService : IViewInfoService
     {
-        private readonly IUnitOfWorkEntities uow;
+        private readonly IUnitOfWorkEntities _uow;
+        private readonly IMapper _mapper;
 
-        public ViewInfoService(IUnitOfWorkEntities uow)
+        public ViewInfoService(IUnitOfWorkEntities uow, IMapper mapper)
         {
-            this.uow = uow;
+            _uow = uow;
+            _mapper = mapper;
         }
 
         public MovieDTO GetMovie(int id)
         {
-            throw new NotImplementedException();
+            var movie = _uow.Sessions.GetById(id);
+
+            var movies = _mapper.Map<MovieDTO>(movie);
+
+            return movies;
         }
 
         public List<MovieDTO> GetMovies()
         {
-            var movies = uow.Movies.GetAll();
+            var movies = _uow.Movies.GetAll().ToList();
 
-            //map
+            var moviesDTO = _mapper.Map<List<MovieDTO>>(movies);
 
-            return null;
+            return moviesDTO;
         }
 
         public SessionDTO GetSession(int id)
         {
-            throw new NotImplementedException();
+            var session = _uow.Sessions.GetById(id);
+
+            var sessionDTO = _mapper.Map<SessionDTO>(session);
+
+            return sessionDTO;
         }
 
         public List<SessionDTO> GetSessions()
         {
-            var sessions = uow.Sessions.GetAll().OrderBy(x => x.Date);
+            var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
 
-            //map
+            var sessionDTO = _mapper.Map<List<SessionDTO>>(sessions);
 
-            return null;
+            return sessionDTO;
         }
     }
 }

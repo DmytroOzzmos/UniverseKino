@@ -9,7 +9,7 @@ namespace UniverseKino.WEB
 {
     [Route("admin")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         [HttpPost("sessions")]
@@ -19,7 +19,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpDelete("sessions/{id}")]
-        public IActionResult DeleteSessinons([FromQuery] int id)
+        public IActionResult DeleteSessinons(int id)
         {
             return Ok();
         }

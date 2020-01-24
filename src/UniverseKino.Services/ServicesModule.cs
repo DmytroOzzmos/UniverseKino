@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using UniverseKino.Core;
 using UniverseKino.Data;
 using UniverseKino.Data.EF;
+using UniverseKino.Services.Interfaces;
+using UniverseKino.Services.Services;
 
 namespace UniverseKino.Services
 {
@@ -22,7 +24,9 @@ namespace UniverseKino.Services
             // new AuthService(x.Resolve<ApplicationContext>()))
             //     .As<IAuthService>();
 
-
+            builder.RegisterType<ViewInfoService>().As<IViewInfoService>();
+            builder.RegisterType<CheckService>().As<ICheckService>();
+            builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
         }
 
     }

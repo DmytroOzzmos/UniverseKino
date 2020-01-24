@@ -20,12 +20,12 @@ namespace UniverseKino.Data.EF
         public UniverseKinoContext(DbContextOptions<UniverseKinoContext> options)
                     : base(options)
         {
-            Database.EnsureCreated();
         }
 
-        // protected override void OnModelCreating(ModelBuilder modelBuilder)
-        // {
-        //     modelBuilder.
-        // }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var init = new InitDb(modelBuilder);
+            init.InitCinemaHall();
+        }
     }
 }

@@ -8,7 +8,6 @@ namespace UniverseKino.Services.Interfaces
     public interface IManageMoviesService
     {
         void Add(MovieDTO session);
-        void Update(MovieDTO session);
-        bool Remove(int id);
+        void Remove(int id);
     }
 }
