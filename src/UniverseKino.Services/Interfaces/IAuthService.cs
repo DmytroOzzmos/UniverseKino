@@ -10,6 +10,8 @@ namespace UniverseKino.Services
     {
         Task<TokenResponseDTO> Register(RegistrationRequestDTO data);
         Task<TokenResponseDTO> Authenticate(LoginRequestDTO data);
+
+        List<dynamic> AllUsers();
         IEnumerable<ApplicationUser> GetAll();
         // Task<OperationDetails> Create(UserDTO userDto);
         // Task<ClaimsIdentity> Authenticate(UserDTO userDto);

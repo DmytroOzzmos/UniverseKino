@@ -36,6 +36,13 @@ namespace UniverseKino.Services
             _hasher = hasher;
             key = _jwt.GetSecretKey();
         }
+        private dynamic Convert(ApplicationUser user) => new { User = user };
+        public List<dynamic> AllUsers()
+        {
+            return _userRepo.Users.ConvertAll<dynamic>(
+                new Converter<ApplicationUser, dynamic>(Convert)
+            );
+        }
 
         public Task<TokenResponseDTO> Authenticate(LoginRequestDTO data)
         {
@@ -97,15 +104,14 @@ namespace UniverseKino.Services
             newUser.Role = "User";
             newUser.Password = _hasher.Hash(data.Password);
 
-            _userRepo.Users.Add(newUser);
-            await _userRepo.SaveChangesAsync();
+            var savedUser = await _userRepo.AddAsync(newUser);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
                              new Claim[] {
-                new Claim (ClaimsIdentity.DefaultNameClaimType, newUser.Username),
-                new Claim (ClaimsIdentity.DefaultRoleClaimType, newUser.Role),
+                new Claim (ClaimsIdentity.DefaultNameClaimType, savedUser.Username),
+                new Claim (ClaimsIdentity.DefaultRoleClaimType, savedUser.Role),
                              },
                              "Token",
                              ClaimsIdentity.DefaultNameClaimType,

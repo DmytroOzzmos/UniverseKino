@@ -19,14 +19,11 @@ namespace UniverseKino.WEB
         {
             _authServ = authServ;
 
-            // _mapper = new MapperConfiguration(mc =>
-            //  {
-            //      mc.AddProfile(new MappingProfile());
-            //  })
-            //  .CreateMapper();
-
             _mapper = mapper;
         }
+        [HttpGet]
+        [Route("users")]
+        public IActionResult AllUsers() => Ok(_authServ.AllUsers());
 
         [HttpPost]
         [Route("Registration")]

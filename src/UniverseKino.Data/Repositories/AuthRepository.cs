@@ -9,13 +9,28 @@ namespace UniverseKino.Data.Repositories
 {
     public class AuthRepository
     {
-        public List<ApplicationUser> Users { get; set; }
+        // public List<ApplicationUser> Users() => _appContext.ApplicationUsers.ToList();
+        public List<ApplicationUser> Users
+        {
+            get
+            {
+                return _appContext.ApplicationUsers.ToList();
+            }
+        }
+
+        public async Task<ApplicationUser> AddAsync(ApplicationUser user)
+        {
+
+            var savedUser = await _appContext.ApplicationUsers.AddAsync(user);
+            await _appContext.SaveChangesAsync();
+
+            return _appContext.ApplicationUsers.Where(u => u.Email == user.Email).FirstOrDefault();
+        }
 
         private ApplicationContext _appContext;
         public AuthRepository(ApplicationContext dbContext)
         {
             _appContext = dbContext;
-            Users = dbContext.ApplicationUsers.ToList();
         }
 
         public void SaveChanges()

@@ -36,7 +36,13 @@ namespace UniverseKino.Data
                 );
 
 
-            builder.RegisterInstance(appContext).As<ApplicationContext>();
+            builder.Register(ctx => new ApplicationContext(
+                 new DbContextOptionsBuilder<ApplicationContext>()
+                .UseSqlServer(connString)
+                .Options
+                ))
+                .As<ApplicationContext>()
+            .InstancePerDependency();
             // builder.Register(c => new ApplicationContext(appContext.Options))
             //     .InstancePerDependency();
 
@@ -49,7 +55,8 @@ namespace UniverseKino.Data
                 ))
             .InstancePerDependency();
 
-            builder.Register(r => new AuthRepository(r.Resolve<ApplicationContext>()));
+            builder.RegisterType<AuthRepository>()
+            .InstancePerDependency();
 
             builder.Register(u => new UnitOfWork(u.Resolve<UniverseKinoContext>()))
             .As<IUnitOfWorkEntities>()
