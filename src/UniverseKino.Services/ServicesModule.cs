@@ -58,10 +58,10 @@ namespace UniverseKino.Services
             //)
             //         .As<IInfoMoviesService>();
 
-            builder.Register(x => new SessionsInfoService(
+            builder.Register(x => new InfoSessionsService(
                 x.Resolve<IUnitOfWorkEntities>(),
                 x.Resolve<IMapper>()))
-                .As<ISessionsInfoService>();
+                .As<IInfoSessionsService>();
         }
 
     }

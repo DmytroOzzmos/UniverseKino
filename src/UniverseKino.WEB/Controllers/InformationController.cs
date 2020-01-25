@@ -17,10 +17,10 @@ namespace UniverseKino.WEB.Controllers
     public class InfoController : ControllerBase
     {
         private IInfoMoviesService _moviesServ;
+        private readonly IInfoSessionsService _sessionsInfoService;
         private IMapper _mapper;
-        private readonly ISessionsInfoService _sessionsInfoService;
 
-        public InfoController(IInfoMoviesService moviesServ, ISessionsInfoService sessionsInfoService, IMapper mapper)
+        public InfoController(IInfoMoviesService moviesServ, IInfoSessionsService sessionsInfoService, IMapper mapper)
         {
             _moviesServ = moviesServ;
             _sessionsInfoService = sessionsInfoService;
@@ -28,13 +28,7 @@ namespace UniverseKino.WEB.Controllers
         }
 
 
-        //public InformationController(ISessionsInfoService sessionsInfoService, IMapper mapper)
-        //{
-        //    _sessionsInfoService = sessionsInfoService;
-        //    _mapper = mapper;
-        //}
-
-        [HttpGet("schedule")]
+        [HttpGet("sessions/all")]
         public async Task<IActionResult> GetAllSessions()
         {
             var sessionDTO = _sessionsInfoService.GetAllSessions();
@@ -52,11 +46,11 @@ namespace UniverseKino.WEB.Controllers
 
         [HttpGet]
         [Route("movies")]
-        public IActionResult GetAllMovies()
+        public async Task<IActionResult> GetAllMovies()
         {
-            var movies = _moviesServ.GetAllMovies();
+            var movies = await _moviesServ.GetAllMovies();
 
-            return Ok(_mapper.Map<List<MovieDTO>>(movies));
+            return Ok(_mapper.Map<List<MovieDTO>>(movies));   //TODO map
         }
 
         [HttpGet("movies/{id}")]
@@ -64,7 +58,7 @@ namespace UniverseKino.WEB.Controllers
         {
             var movie = await _moviesServ.GetMovieByID(id);
 
-            return Ok(_mapper.Map<MovieDTO>(movie));
+            return Ok(_mapper.Map<MovieDTO>(movie));   //TODO map
         }
 
         [HttpGet("movies/{id}/sessions")]
@@ -72,7 +66,7 @@ namespace UniverseKino.WEB.Controllers
         {
             var sessions = await _moviesServ.GetMoviesSessions(id);
 
-            return Ok(_mapper.Map<List<SessionDTO>>(sessions));
+            return Ok(_mapper.Map<List<SessionModel>>(sessions));
         }
     }
 }

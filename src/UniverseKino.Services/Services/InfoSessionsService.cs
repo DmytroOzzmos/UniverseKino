@@ -6,32 +6,39 @@ using UniverseKino.Data.Interfaces;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace UniverseKino.Services.Services
 {
-    public class SessionsInfoService : ISessionsInfoService
+    public class InfoSessionsService : IInfoSessionsService
     {
         private readonly IUnitOfWorkEntities _uow;
         private readonly IMapper _mapper;
 
-        public SessionsInfoService(IUnitOfWorkEntities uow, IMapper mapper)
+        public InfoSessionsService(IUnitOfWorkEntities uow, IMapper mapper)
         {
             _uow = uow;
             _mapper = mapper;
         }
 
-        public List<SessionDTO> GetAllSessions()
+        public async Task<List<SessionDTO>> GetAllSessions()
         {
-            var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
+            var sessions = await Task.Run(() =>
+            {
+                return _uow.Sessions.GetAll()
+                .OrderBy(x => x.Date)
+                .ToList();
+            });
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 
             return sessionsDTO;
         }
 
-        public SessionDTO GetSession(int id)
+        public async Task<SessionDTO> GetSession(int id)
         {
-            var session = _uow.Sessions.GetById(id);
+            var session = await Task.Run(() =>
+                    _uow.Sessions.GetById(id));
 
             if (session == null)
                 throw new Exception("DataNotExist");
@@ -41,9 +48,10 @@ namespace UniverseKino.Services.Services
             return sessionDTO;
         }
 
-        public List<SessionDTO> GetSessionsByMovie(int idMovie)
+        public async Task<List<SessionDTO>> GetSessionsByMovie(int idMovie)
         {
-            var movie = _uow.Movies.GetById(idMovie);
+            var movie = await Task.Run(() => 
+                    _uow.Movies.GetById(idMovie));
 
             if (movie == null)
                 throw new Exception("Movie is not exist");
