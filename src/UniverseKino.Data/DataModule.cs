@@ -91,6 +91,9 @@ namespace UniverseKino.Data
                 }
                 )
                 .As<UniverseKinoContext>();
+
+            //builder.Register(c => new UniverseKinoContext())
+            //    .As<UniverseKinoContext>();
             // .InstancePerDependency();
 
 

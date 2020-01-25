@@ -30,10 +30,15 @@ namespace UniverseKino.Data.EF
         //     Database.EnsureCreated();
 
         // }
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb5;Trusted_Connection=True;");
-        // }
+
+        //public UniverseKinoContext()
+        //{
+        //    Database.EnsureCreated();
+        //}
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb5;Trusted_Connection=True;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CinemaHall>().HasData(
@@ -66,7 +71,6 @@ namespace UniverseKino.Data.EF
                         new Session {Id = 4, Date = GetDate(1, 12), IdMovie = 2, IdCinemaHall = 1 },
                 }
             );
-
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
         {
