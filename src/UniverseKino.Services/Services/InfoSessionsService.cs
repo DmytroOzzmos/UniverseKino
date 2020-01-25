@@ -24,11 +24,9 @@ namespace UniverseKino.Services.Services
         public async Task<List<SessionDTO>> GetAllSessions()
         {
             var sessions = await Task.Run(() =>
-            {
-                return _uow.Sessions.GetAll()
+                _uow.Sessions.GetAll()
                 .OrderBy(x => x.Date)
-                .ToList();
-            });
+                .ToList());
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 

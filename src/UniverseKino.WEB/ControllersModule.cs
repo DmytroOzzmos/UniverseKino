@@ -39,14 +39,6 @@ namespace UniverseKino.WEB
             .As<IMapper>();
 
             builder.RegisterModule<ServicesModule>();
-
-
-
-            // builder.Register(x => )
         }
-
-
-
     }
-
 }

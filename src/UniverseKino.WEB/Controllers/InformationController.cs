@@ -33,7 +33,7 @@ namespace UniverseKino.WEB.Controllers
         {
             var sessionDTO = _infoSessionsService.GetAllSessions();
 
-            //var sessionModel = _mapper.Map<List<SeatModel>>(sessionDTO);
+            var sessionModel = _mapper.Map<List<SeatModel>>(sessionDTO);
 
             return await Task.Run(() => Ok(sessionDTO));
         }

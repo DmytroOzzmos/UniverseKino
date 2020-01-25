@@ -77,17 +77,23 @@ namespace UniverseKino.Data
 
             // builder.Register(ctx => new ApplicationContext(
 
-            builder.Register(c =>
-                {
-                    var ctx = new UniverseKinoContext(
-                 new DbContextOptionsBuilder<UniverseKinoContext>()
-                .UseSqlServer(connString)
-                .Options);
-                    return ctx;
-                }
-                )
-                .As<UniverseKinoContext>();
+            //builder.Register(c =>
+            //    {
+            //        var ctx = new UniverseKinoContext(
+            //     new DbContextOptionsBuilder<UniverseKinoContext>()
+            //    .UseSqlServer(connString)
+            //    .Options);
+            //        return ctx;
+            //    }
+            //    )
+            //    .As<UniverseKinoContext>();
             // .InstancePerDependency();
+
+            builder.Register(c => new UniverseKinoContext(
+                    new DbContextOptionsBuilder<UniverseKinoContext>()
+                    .UseSqlServer(connString)
+                    .Options))
+                .As<UniverseKinoContext>();
 
 
             builder.RegisterType<AuthRepository>();

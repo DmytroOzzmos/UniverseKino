@@ -26,17 +26,18 @@ namespace UniverseKino.Services
             builder.RegisterType<AuthService>().As<IAuthService>();
             //builder.RegisterType<InfoMoviesService>().As<IInfoMoviesService>();
 
-            builder.Register(x =>
-            {
-                var rep = new GenericRepository<Movie>(x.Resolve<UniverseKinoContext>());
-                var serv = new InfoMoviesService(
-                     rep,
-                     x.Resolve<IMapper>()
-                      );
-                return serv;
-            }
-            )
-                     .As<IInfoMoviesService>();
+            //builder.Register(x =>
+            //{
+            //    var rep = new GenericRepository<Movie>(x.Resolve<UniverseKinoContext>());
+            //    var serv = new InfoMoviesService(
+            //         rep,
+            //         x.Resolve<IMapper>()
+            //          );
+            //    return serv;
+            //}
+            //)
+            //         .As<IInfoMoviesService>();
+
 
             // builder.Register(x =>
             // new AuthService(x.Resolve<ApplicationContext>()))
@@ -44,7 +45,12 @@ namespace UniverseKino.Services
 
             builder.RegisterType<ViewInfoService>().As<IViewInfoService>();
             builder.RegisterType<CheckService>().As<ICheckService>();
-            builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
+            
+            builder.Register(x => new ManageMoviesService(
+                    x.Resolve<IUnitOfWorkEntities>(),
+                    x.Resolve<IMapper>(),
+                    x.Resolve<ICheckService>()))
+                .As<IManageMoviesService>();
 
             //builder.Register(x =>
             //{
@@ -58,9 +64,14 @@ namespace UniverseKino.Services
             //)
             //         .As<IInfoMoviesService>();
 
+            builder.Register(x => new InfoMoviesService(
+                    x.Resolve<IUnitOfWorkEntities>(),
+                    x.Resolve<IMapper>()))
+                .As<IInfoMoviesService>();
+
             builder.Register(x => new InfoSessionsService(
-                x.Resolve<IUnitOfWorkEntities>(),
-                x.Resolve<IMapper>()))
+                    x.Resolve<IUnitOfWorkEntities>(),
+                    x.Resolve<IMapper>()))
                 .As<IInfoSessionsService>();
         }
 
