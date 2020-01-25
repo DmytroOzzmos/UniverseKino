@@ -31,13 +31,6 @@ namespace UniverseKino.Services.Services
             return checkMovie != null;
         }
 
-        public bool IsExistMovie(int id)
-        {
-            var checkMovie = _uow.Movies.GetById(id);
-
-            return checkMovie != null;
-        }
-
 
 
         public void ValidationSession(Session session)
