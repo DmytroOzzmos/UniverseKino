@@ -17,6 +17,7 @@ namespace UniverseKino.WEB.Controllers
     {
         private IInfoMoviesService _moviesServ;
         private IMapper _mapper;
+        private readonly ISessionsInfoService _sessionsInfoService;
 
         public InfoController(IInfoMoviesService moviesServ, IMapper mapper)
         {
@@ -24,17 +25,14 @@ namespace UniverseKino.WEB.Controllers
             _mapper = mapper;
         }
 
+
+        //public InformationController(ISessionsInfoService sessionsInfoService, IMapper mapper)
+        //{
+        //    _sessionsInfoService = sessionsInfoService;
+        //    _mapper = mapper;
+        //}
+
         [HttpGet("schedule")]
-        private readonly IMapper _mapper;
-        private readonly ISessionsInfoService _sessionsInfoService;
-
-        public InformationController(ISessionsInfoService sessionsInfoService, IMapper mapper)
-        {
-            _sessionsInfoService = sessionsInfoService;
-            _mapper = mapper;
-        }
-
-        [HttpGet("sessions/all")]
         public async Task<IActionResult> GetAllSessions()
         {
             var sessionDTO = _sessionsInfoService.GetAllSessions();
