@@ -24,8 +24,6 @@ namespace UniverseKino.WEB
             builder.RegisterType<ServicesMappingProfile>();
             // ServiceMappingProfile
             // builder.Build();
-            var arr = new List<Profile> { };
-            // builder.Register(x => new AuthController(x.Resolve<IMapper>()));
             builder.Register(x =>
                         new MapperConfiguration(mc =>
                        mc.AddProfiles(new List<Profile>
@@ -36,7 +34,7 @@ namespace UniverseKino.WEB
                            )
                         ).CreateMapper()
             )
-            .As<IMapper>();           // builder.RegisterType<Profile>();
+            .As<IMapper>();
 
             builder.RegisterModule<ServicesModule>();
 
