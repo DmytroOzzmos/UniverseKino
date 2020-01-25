@@ -19,7 +19,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpDelete("sessions/{id}")]
-        public IActionResult DeleteSessinons(int id)
+        public IActionResult DeleteSessinons([FromRoute]int id)
         {
             return Ok();
         }
@@ -33,7 +33,7 @@ namespace UniverseKino.WEB
 
 
         [HttpDelete("movies/{id}")]
-        public IActionResult DeleteMovies([FromQuery] int id)
+        public IActionResult DeleteMovies([FromRoute] int id)
         {
             return Ok();
         }
