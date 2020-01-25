@@ -22,10 +22,10 @@ namespace UniverseKino.Data.EF
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            var init = new InitDb(modelBuilder);
-            init.InitCinemaHall();
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    var init = new InitDb(modelBuilder);
+        //    init.InitCinemaHall();
+        //}
     }
 }

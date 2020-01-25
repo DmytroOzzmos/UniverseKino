@@ -22,11 +22,14 @@ namespace UniverseKino.Services.Services
 
         public List<SessionDTO> GetAllSessions()
         {
-            var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
+            using (_uow)
+            {
+                var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
 
-            var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
+                var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 
-            return sessionsDTO;
+                return sessionsDTO;
+            }
         }
 
         public SessionDTO GetSession(int id)
