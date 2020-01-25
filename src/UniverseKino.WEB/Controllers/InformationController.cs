@@ -58,17 +58,17 @@ namespace UniverseKino.WEB.Controllers
         }
 
         [HttpGet("movies/{id}")]
-        public async Task<IActionResult> GetMovie([FromQuery] int id)
+        public IActionResult GetMovie([FromRoute] int id)
         {
-            var movie = await _moviesServ.GetMovieByID(id);
+            var movie = _moviesServ.GetMovieByID(id);
 
             return Ok(_mapper.Map<MovieDTO>(movie));
         }
 
         [HttpGet("movies/{id}/sessions")]
-        public async Task<IActionResult> GetSessionsMovie([FromQuery] int id)
+        public IActionResult GetSessionsMovie([FromRoute] int id)
         {
-            var sessions = await _moviesServ.GetMoviesSessions(id);
+            var sessions = _moviesServ.GetMoviesSessions(id);
 
             return Ok(_mapper.Map<List<SessionDTO>>(sessions));
         }

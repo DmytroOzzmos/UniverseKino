@@ -11,9 +11,9 @@ namespace UniverseKino.Services.Services
 {
     public interface IInfoMoviesService
     {
-        Task<Movie> GetMovieByID(int id);
-        Task<Movie> GetMovieByName(string movieName);
-        Task<List<Session>> GetMoviesSessions(int id);
+        MovieDTO GetMovieByID(int id);
+        MovieDTO GetMovieByName(string movieName);
+        List<SessionDTO> GetMoviesSessions(int id);
         // Task<List<MovieDTO>> GetAllMovies();
         List<MovieDTO> GetAllMovies();
 
@@ -40,9 +40,13 @@ namespace UniverseKino.Services.Services
 
         public List<MovieDTO> GetAllMovies()
         {
-            var a = rep.GetAll();
-            // return await Task.Run(() =>_moviesRepo.GetAll());
-            return _mapper.Map<List<MovieDTO>>(rep.GetAll());
+            var movies = _unit.Movies.GetAll();
+
+            return _mapper.Map<List<MovieDTO>>(movies);
+
+            //var a = rep.GetAll();
+            //// return await Task.Run(() =>_moviesRepo.GetAll());
+            //return _mapper.Map<List<MovieDTO>>(rep.GetAll());
         }
         // public async Task<List<MovieDTO>> GetAllMovies()
         // {
@@ -63,48 +67,55 @@ namespace UniverseKino.Services.Services
         //     return _mapper.Map<List<MovieDTO>>(movies1);
         // }
 
-        public async Task<Movie> GetMovieByID(int id)
+        public MovieDTO GetMovieByID(int id)
         {
-            var movie = await Task.Run(() =>
-                {
-                    // var movie = new List<Movie>();
-                    using (_unit)
-                    {
-                        return _unit.Movies.GetById(id);
-                    }
-                });
+            //var movie = await Task.Run(() =>
+            //    {
+            //        // var movie = new List<Movie>();
+            //        using (_unit)
+            //        {
+            //            return _unit.Movies.GetById(id);
+            //        }
+            //    });
 
-            //    _moviesRepo.GetById(id));
-            if (movie == null)
-            {
-                throw new Exception();
-            }
+            ////    _moviesRepo.GetById(id));
+            //if (movie == null)
+            //{
+            //    throw new Exception();
+            //}
 
-            return movie;
+            //return movie;
             // return _mapper.Map<MovieDTO>(movie);
+
+            var movie = _unit.Movies.GetById(id);
+
+            return _mapper.Map<MovieDTO>(movie);
         }
 
-        public async Task<Movie> GetMovieByName(string movieName)
+        public MovieDTO GetMovieByName(string movieName)
         {
-            //     var movie = await Task.Run(() =>
-            //                 _moviesRepo.Find((m) =>
-            //                  m.Name.ToLower() == movieName.ToLower())
-            //                 .FirstOrDefault()
-            //                 );
+            var movie = _unit.Movies.Find(m =>
+                             m.Name.ToLower() == movieName.ToLower())
+                             .FirstOrDefault();
 
-            //     if (movie == null)
-            //     {
-            //         throw new Exception();
-            //     }
+            if (movie == null)
+                throw new Exception();
 
-            return null;
+            var movieDTO = _mapper.Map<MovieDTO>(movie);
+
+            return movieDTO;
         }
 
-        public async Task<List<Session>> GetMoviesSessions(int id)
+        public List<SessionDTO> GetMoviesSessions(int id)
         {
-            var movie = await GetMovieByID(id);
+            var movie = _unit.Movies.GetById(id);
 
-            return movie.Sessions.ToList();
+            var sessions = movie.Sessions.OrderBy(s => s.Date).ToList();
+
+            var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
+
+            return sessionsDTO;
+
             // var movieSessions = _mapper.Map<ICollection<Ses
             // movie.Sessions.ToList()
 
