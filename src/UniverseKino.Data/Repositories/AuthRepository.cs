@@ -27,8 +27,8 @@ namespace UniverseKino.Data.Repositories
             return _appContext.ApplicationUsers.Where(u => u.Email == user.Email).FirstOrDefault();
         }
 
-        private ApplicationContext _appContext;
-        public AuthRepository(ApplicationContext dbContext)
+        private UniverseKinoContext _appContext;
+        public AuthRepository(UniverseKinoContext dbContext)
         {
             _appContext = dbContext;
         }

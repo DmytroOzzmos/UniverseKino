@@ -5,6 +5,7 @@ using UniverseKino.Core;
 using UniverseKino.Services;
 using UniverseKino.Data.Entities;
 using UniverseKino.Services.Dto;
+using System.Collections.Generic;
 
 namespace UniverseKino.Services
 {
@@ -27,6 +28,12 @@ namespace UniverseKino.Services
 
             CreateMap<Movie, MovieDTO>();
             CreateMap<MovieDTO, Movie>();
+            CreateMap<Movie, MovieDTO>();
+            CreateMap<List<MovieDTO>, List<Movie>>();
+            CreateMap<List<Movie>, List<MovieDTO>>();
+            CreateMap<SeatDTO, Seat>();
+            CreateMap<SessionDTO, Session>()
+                .ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
 
             CreateMap<SessionDTO, Session>();
                 //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
