@@ -14,6 +14,8 @@ namespace UniverseKino.Data.EF
         public DbSet<Seat> Seats { get; set; }
 
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
 
         public DbSet<Reservation> Reservations { get; set; }
 
@@ -21,8 +23,17 @@ namespace UniverseKino.Data.EF
                     : base(options)
         {
             Database.EnsureCreated();
-        }
 
+        }
+        // public UniverseKinoContext()
+        // {
+        //     Database.EnsureCreated();
+
+        // }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb5;Trusted_Connection=True;");
+        // }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CinemaHall>().HasData(

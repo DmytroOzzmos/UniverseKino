@@ -13,6 +13,8 @@ using UniverseKino.Services;
 
 namespace UniverseKino.WEB
 {
+
+
     public class ControllersModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -38,8 +40,13 @@ namespace UniverseKino.WEB
 
             builder.RegisterModule<ServicesModule>();
 
+
+
             // builder.Register(x => )
         }
 
+
+
     }
+
 }

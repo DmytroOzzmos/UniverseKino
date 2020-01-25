@@ -22,25 +22,21 @@ namespace UniverseKino.Services.Services
     public class InfoMoviesService : IInfoMoviesService
     {
         private IUnitOfWorkEntities _unit;
-        // private IGenericRepository<Movie> _moviesRepo;
+        private IGenericRepository<Movie> rep;        // private IGenericRepository<Movie> _moviesRepo;
         private IMapper _mapper;
-        public InfoMoviesService(IUnitOfWorkEntities unitOfWork, IMapper mapper)
+        public InfoMoviesService(IGenericRepository<Movie> rep, IMapper mapper)
         {
             // _moviesRepo = unitOfWork.Movies;
-            _unit = unitOfWork;
+            this.rep = rep;
             _mapper = mapper;
         }
 
 
         public List<MovieDTO> GetAllMovies()
         {
+            var a = rep.GetAll();
             // return await Task.Run(() =>_moviesRepo.GetAll());
-            using (_unit)
-            {
-                var movies = _unit.Movies.GetAll().ToList();
-                return _mapper.Map<List<MovieDTO>>(movies);
-            }
-
+            return _mapper.Map<List<MovieDTO>>(rep.GetAll());
         }
         // public async Task<List<MovieDTO>> GetAllMovies()
         // {
