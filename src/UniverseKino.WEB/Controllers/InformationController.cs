@@ -16,14 +16,14 @@ namespace UniverseKino.WEB.Controllers
     [ApiController]
     public class InfoController : ControllerBase
     {
-        private IInfoMoviesService _moviesServ;
-        private readonly IInfoSessionsService _sessionsInfoService;
-        private IMapper _mapper;
+        private readonly IInfoMoviesService _moviesServ;
+        private readonly IInfoSessionsService _infoSessionsService;
+        private readonly IMapper _mapper;
 
-        public InfoController(IInfoMoviesService moviesServ, IInfoSessionsService sessionsInfoService, IMapper mapper)
+        public InfoController(IInfoMoviesService moviesServ, IInfoSessionsService infoSessionsService, IMapper mapper)
         {
             _moviesServ = moviesServ;
-            _sessionsInfoService = sessionsInfoService;
+            _infoSessionsService = infoSessionsService;
             _mapper = mapper;
         }
 
@@ -31,7 +31,7 @@ namespace UniverseKino.WEB.Controllers
         [HttpGet("sessions/all")]
         public async Task<IActionResult> GetAllSessions()
         {
-            var sessionDTO = _sessionsInfoService.GetAllSessions();
+            var sessionDTO = _infoSessionsService.GetAllSessions();
 
             //var sessionModel = _mapper.Map<List<SeatModel>>(sessionDTO);
 
@@ -64,7 +64,7 @@ namespace UniverseKino.WEB.Controllers
         [HttpGet("movies/{id}/sessions")]
         public async Task<IActionResult> GetSessionsMovie([FromQuery] int id)
         {
-            var sessions = await _moviesServ.GetMoviesSessions(id);
+            var sessions = await _infoSessionsService.GetSessionsByMovie(id);
 
             return Ok(_mapper.Map<List<SessionModel>>(sessions));
         }
