@@ -12,19 +12,15 @@ namespace UniverseKino.WEB
         public MappingProfile()
         {
             CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
-            // .ForMember(x => x.Email, opt => opt.MapFrom(x1 => x1.UserName));
+
             CreateMap<LoginRequestView, LoginRequestDTO>();
-            //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
-            //CreateMap<CreateLotDTO, Lot>();
 
             CreateMap<SeatModel, SeatDTO>();
             CreateMap<SeatDTO, SeatModel>();
 
             CreateMap<SessionModel, SessionDTO>();
-                //.ForMember(a => a.NameMovie, opt => opt.MapFrom(b => b.NameMovie));
+            //.ForMember(a => a.NameMovie, opt => opt.MapFrom(b => b.NameMovie));
             CreateMap<SessionDTO, SessionModel>();
-            CreateMap<List<SessionModel>, List<SessionDTO>>();
-            CreateMap<List<SessionDTO>, List<SessionModel>>();
         }
 
 

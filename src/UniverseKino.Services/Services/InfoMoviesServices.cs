@@ -24,10 +24,16 @@ namespace UniverseKino.Services.Services
         private IUnitOfWorkEntities _unit;
         private IGenericRepository<Movie> rep;        // private IGenericRepository<Movie> _moviesRepo;
         private IMapper _mapper;
-        public InfoMoviesService(IGenericRepository<Movie> rep, IMapper mapper)
+        //public InfoMoviesService(IGenericRepository<Movie> rep, IMapper mapper)
+        //{
+        //    // _moviesRepo = unitOfWork.Movies;
+        //    this.rep = rep;
+        //    _mapper = mapper;
+        //}
+
+        public InfoMoviesService(IUnitOfWorkEntities unit, IMapper mapper)
         {
-            // _moviesRepo = unitOfWork.Movies;
-            this.rep = rep;
+            _unit = unit;
             _mapper = mapper;
         }
 

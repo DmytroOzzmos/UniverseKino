@@ -26,22 +26,19 @@ namespace UniverseKino.Services
             CreateMap<SeatDTO, Seat>();
             CreateMap<Seat, SeatDTO>();
 
-            CreateMap<Movie, MovieDTO>();
             CreateMap<MovieDTO, Movie>();
             CreateMap<Movie, MovieDTO>();
-            CreateMap<List<MovieDTO>, List<Movie>>();
-            CreateMap<List<Movie>, List<MovieDTO>>();
-            //CreateMap<SeatDTO, Seat>();
+
             CreateMap<SessionDTO, Session>();
-                //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
+            //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
 
             //CreateMap<SessionDTO, Session>();
-                //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
-            //.ForMember(a => a.Movie.Genre, opt => opt.MapFrom(b => b.GenreMovie))
-            //.ForMember(a => a.Movie.Duration, opt => opt.MapFrom(b => b.DurationMovie))
-            //.ForMember(a => a.CinemaHall.Number, opt => opt.MapFrom(b => b.NumberHall))
-            //.ForMember(a => a.CinemaHall.Seats, opt => opt.MapFrom(b => b.Seats));
-            CreateMap<Session, SessionDTO>();
+            CreateMap<Session, SessionDTO>()
+                .ForMember(a => a.NameMovie, opt => opt.MapFrom(b => b.Movie.Name))
+                .ForMember(a => a.GenreMovie, opt => opt.MapFrom(b => b.Movie.Genre))
+                .ForMember(a => a.DurationMovie, opt => opt.MapFrom(b => b.Movie.Duration))
+                .ForMember(a => a.NumberHall, opt => opt.MapFrom(b => b.CinemaHall.Number))
+                .ForMember(a => a.Seats, opt => opt.MapFrom(b => b.CinemaHall.Seats));
         }
     }
 }

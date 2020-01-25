@@ -17,13 +17,15 @@ namespace UniverseKino.Data
     {
         protected void OnModelCreating(UniverseKinoContext ctx)
         {
+            InitDb init = new InitDb();
+
             ctx.CinemaHalls.AddRange(
                 new CinemaHall[]
                     {
-                        new CinemaHall { Number = 1, Id = 1 },
-                        new CinemaHall { Number = 2, Id = 2 },
-                        new CinemaHall { Number = 3, Id = 3 },
-                        new CinemaHall { Number = 4, Id = 4 },
+                        new CinemaHall { Number = 1, Id = 1, Seats = init.GetSeats(10, 10, 100, 1) },
+                        new CinemaHall { Number = 2, Id = 2, Seats = init.GetSeats(10, 10, 150, 2) },
+                        new CinemaHall { Number = 3, Id = 3, Seats = init.GetSeats(13, 13, 200, 3) },
+                        new CinemaHall { Number = 4, Id = 4, Seats = init.GetSeats(10, 10, 177, 4) },
                     }
             );
 
@@ -47,6 +49,8 @@ namespace UniverseKino.Data
                         new Session {Id = 4, Date = GetDate(1, 12), IdMovie = 2, IdCinemaHall = 1 },
                 }
             );
+
+            ctx.SaveChanges();
 
         }
         private static DateTime GetDate(int day = 0, int hour = 8)

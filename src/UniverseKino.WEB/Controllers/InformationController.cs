@@ -28,30 +28,28 @@ namespace UniverseKino.WEB.Controllers
         }
 
 
-        //public InformationController(ISessionsInfoService sessionsInfoService, IMapper mapper)
-        //{
-        //    _sessionsInfoService = sessionsInfoService;
-        //    _mapper = mapper;
-        //}
-
-        [HttpGet("schedule")]
+        [HttpGet("sessions")]
         public async Task<IActionResult> GetAllSessions()
         {
             var sessionDTO = _sessionsInfoService.GetAllSessions();
 
-            //var sessionModel = _mapper.Map<List<SeatModel>>(sessionDTO);
+            var sessionModel = _mapper.Map<List<SessionModel>>(sessionDTO);
+
+            return await Task.Run(() => Ok(sessionModel));
+        }
+
+        [HttpGet]
+        [Route("sessions/{id}")]
+        public async Task<IActionResult> GetSession([FromRoute] int id)
+        {
+            var sessionDTO = _sessionsInfoService.GetSession(id);
+
+            var sessionModel = _mapper.Map<SessionModel>(sessionDTO);
 
             return await Task.Run(() => Ok(sessionDTO));
         }
 
-        [HttpGet("sessions/{id}")]
-        public async Task<IActionResult> GetSession([FromQuery] int id)
-        {
-            return await Task.Run(() => Ok());
-        }
-
-        [HttpGet]
-        [Route("movies")]
+        [HttpGet("movies")]
         public IActionResult GetAllMovies()
         {
             var movies = _moviesServ.GetAllMovies();
