@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using UniverseKino.Services;
+using UniverseKino.Services.Dto;
 using UniverseKino.WEB.Models;
 
 namespace UniverseKino.WEB
@@ -14,6 +15,12 @@ namespace UniverseKino.WEB
             CreateMap<LoginRequestView, LoginRequestDTO>();
             //CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
             //CreateMap<CreateLotDTO, Lot>();
+
+            CreateMap<SeatModel, SeatDTO>();
+            CreateMap<SeatDTO, SeatModel>();
+
+            CreateMap<SessionModel, SessionDTO>();
+            CreateMap<SessionDTO, SessionModel>();
         }
 
 

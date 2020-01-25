@@ -9,5 +9,6 @@ namespace UniverseKino.Services.Interfaces
     {
         SessionDTO GetSession(int id);
         List<SessionDTO> GetAllSessions();
+        List<SessionDTO> GetSessionsByMovie(int idMovie);
     }
 }

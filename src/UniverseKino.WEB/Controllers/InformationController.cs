@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using UniverseKino.Services.Interfaces;
+using UniverseKino.WEB.Models;
 
 namespace UniverseKino.WEB
 {
@@ -10,10 +13,23 @@ namespace UniverseKino.WEB
     [ApiController]
     public class InformationController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly ISessionsInfoService _sessionsInfoService;
+
+        public InformationController(ISessionsInfoService sessionsInfoService, IMapper mapper)
+        {
+            _sessionsInfoService = sessionsInfoService;
+            _mapper = mapper;
+        }
+
         [HttpGet("sessions/all")]
         public async Task<IActionResult> GetAllSessions()
         {
-            return await Task.Run(() => Ok("Go to the nahuy"));
+            var sessionDTO = _sessionsInfoService.GetAllSessions();
+
+            var sessionModel = _mapper.Map<SessionModel>(sessionDTO);
+
+            return await Task.Run(() => Ok(sessionModel));
         }
 
         [HttpGet("sessions/{id}")]

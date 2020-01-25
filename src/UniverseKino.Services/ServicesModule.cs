@@ -27,6 +27,8 @@ namespace UniverseKino.Services
             builder.RegisterType<ViewInfoService>().As<IViewInfoService>();
             builder.RegisterType<CheckService>().As<ICheckService>();
             builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
+
+            builder.RegisterType<SessionsInfoService>().As<ISessionsInfoService>();
         }
 
     }
