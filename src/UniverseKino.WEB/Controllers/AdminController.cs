@@ -9,7 +9,7 @@ namespace UniverseKino.WEB
 {
     [Route("admin")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : ControllerBase
     {
         [HttpPost("sessions")]

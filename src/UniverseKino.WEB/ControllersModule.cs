@@ -9,7 +9,6 @@ using UniverseKino.Services;
 using UniverseKino.WEB.Models;
 using UniverseKino.WEB;
 using UniverseKino.Services.Services;
-using UniverseKino.Services;
 
 namespace UniverseKino.WEB
 {
@@ -19,13 +18,10 @@ namespace UniverseKino.WEB
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // builder.RegisterInstance
-            //builder.Register(x => new MappingProfile());
             builder.Register(x => new PasswordHasher());
             builder.RegisterType<MappingProfile>();
             builder.RegisterType<ServicesMappingProfile>();
-            // ServiceMappingProfile
-            // builder.Build();
+            
             builder.Register(x =>
                         new MapperConfiguration(mc =>
                        mc.AddProfiles(new List<Profile>
@@ -39,14 +35,7 @@ namespace UniverseKino.WEB
             .As<IMapper>();
 
             builder.RegisterModule<ServicesModule>();
-
-
-
-            // builder.Register(x => )
         }
-
-
-
     }
 
 }
