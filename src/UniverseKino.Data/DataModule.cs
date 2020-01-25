@@ -68,11 +68,11 @@ namespace UniverseKino.Data
             //var connString = root.GetConnectionString("Realese");
 
 
-            var dbContext = new UniverseKinoContext(
-                 new DbContextOptionsBuilder<UniverseKinoContext>()
-                .UseSqlServer(connString)
-                .Options
-                );
+            //var dbContext = new UniverseKinoContext(
+            //     new DbContextOptionsBuilder<UniverseKinoContext>()
+            //    .UseSqlServer(connString)
+            //    .Options
+            //    );
 
 
             // builder.Register(ctx => new ApplicationContext(

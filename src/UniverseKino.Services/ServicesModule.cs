@@ -24,7 +24,8 @@ namespace UniverseKino.Services
 
             builder.RegisterModule<DataModule>();
             builder.RegisterType<AuthService>().As<IAuthService>();
-            builder.RegisterType<InfoMoviesService>().As<IInfoMoviesService>();
+            //builder.RegisterType<InfoMoviesService>().As<IInfoMoviesService>();
+
             builder.Register(x =>
             {
                 var rep = new GenericRepository<Movie>(x.Resolve<UniverseKinoContext>());
@@ -36,6 +37,7 @@ namespace UniverseKino.Services
             }
             )
                      .As<IInfoMoviesService>();
+
             // builder.Register(x =>
             // new AuthService(x.Resolve<ApplicationContext>()))
             //     .As<IAuthService>();
@@ -44,7 +46,22 @@ namespace UniverseKino.Services
             builder.RegisterType<CheckService>().As<ICheckService>();
             builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
 
-            builder.RegisterType<SessionsInfoService>().As<ISessionsInfoService>();
+            //builder.Register(x =>
+            //{
+            //    var rep = x.Resolve<UnitOfWork>().Movies;
+            //    var serv = new InfoMoviesService(
+            //         rep,
+            //         x.Resolve<IMapper>()
+            //          );
+            //    return serv;
+            //}
+            //)
+            //         .As<IInfoMoviesService>();
+
+            builder.Register(x => new SessionsInfoService(
+                x.Resolve<IUnitOfWorkEntities>(),
+                x.Resolve<IMapper>()))
+                .As<ISessionsInfoService>();
         }
 
     }

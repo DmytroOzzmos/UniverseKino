@@ -8,14 +8,14 @@ namespace UniverseKino.Services.Dto
     {
         public DateTime Date { get; set; }
 
-        public string NameMovie { get; set; }
+        //public string NameMovie { get; set; }
 
-        public string GenreMovie { get; set; }
+        //public string GenreMovie { get; set; }
 
-        public int DurationMovie { get; set; }
+        //public int DurationMovie { get; set; }
 
-        public int NumberHall { get; set; }
+        //public int NumberHall { get; set; }
 
-        public List<SeatDTO> Seats { get; set; }
+        //public List<SeatDTO> Seats { get; set; }
     }
 }

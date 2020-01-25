@@ -20,7 +20,7 @@ namespace UniverseKino.WEB
         protected override void Load(ContainerBuilder builder)
         {
             // builder.RegisterInstance
-            builder.Register(x => new MappingProfile());
+            //builder.Register(x => new MappingProfile());
             builder.Register(x => new PasswordHasher());
             builder.RegisterType<MappingProfile>();
             builder.RegisterType<ServicesMappingProfile>();

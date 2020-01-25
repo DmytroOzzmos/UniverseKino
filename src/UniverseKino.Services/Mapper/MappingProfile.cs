@@ -31,11 +31,11 @@ namespace UniverseKino.Services
             CreateMap<Movie, MovieDTO>();
             CreateMap<List<MovieDTO>, List<Movie>>();
             CreateMap<List<Movie>, List<MovieDTO>>();
-            CreateMap<SeatDTO, Seat>();
-            CreateMap<SessionDTO, Session>()
-                .ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
-
+            //CreateMap<SeatDTO, Seat>();
             CreateMap<SessionDTO, Session>();
+                //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
+
+            //CreateMap<SessionDTO, Session>();
                 //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
             //.ForMember(a => a.Movie.Genre, opt => opt.MapFrom(b => b.GenreMovie))
             //.ForMember(a => a.Movie.Duration, opt => opt.MapFrom(b => b.DurationMovie))

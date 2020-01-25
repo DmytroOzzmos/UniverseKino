@@ -8,6 +8,7 @@ using UniverseKino.Services.Dto;
 using UniverseKino.Services.Services;
 using UniverseKino.Services.Interfaces;
 using UniverseKino.WEB.Models;
+using UniverseKino.Services;
 
 namespace UniverseKino.WEB.Controllers
 {
@@ -19,9 +20,10 @@ namespace UniverseKino.WEB.Controllers
         private IMapper _mapper;
         private readonly ISessionsInfoService _sessionsInfoService;
 
-        public InfoController(IInfoMoviesService moviesServ, IMapper mapper)
+        public InfoController(IInfoMoviesService moviesServ, ISessionsInfoService sessionsInfoService, IMapper mapper)
         {
             _moviesServ = moviesServ;
+            _sessionsInfoService = sessionsInfoService;
             _mapper = mapper;
         }
 
@@ -37,9 +39,9 @@ namespace UniverseKino.WEB.Controllers
         {
             var sessionDTO = _sessionsInfoService.GetAllSessions();
 
-            var sessionModel = _mapper.Map<SessionModel>(sessionDTO);
+            //var sessionModel = _mapper.Map<List<SeatModel>>(sessionDTO);
 
-            return await Task.Run(() => Ok(sessionModel));
+            return await Task.Run(() => Ok(sessionDTO));
         }
 
         [HttpGet("sessions/{id}")]

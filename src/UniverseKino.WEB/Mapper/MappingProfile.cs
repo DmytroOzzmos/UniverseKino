@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using System.Collections.Generic;
 using UniverseKino.Services;
 using UniverseKino.Services.Dto;
 using UniverseKino.WEB.Models;
@@ -20,7 +21,10 @@ namespace UniverseKino.WEB
             CreateMap<SeatDTO, SeatModel>();
 
             CreateMap<SessionModel, SessionDTO>();
+                //.ForMember(a => a.NameMovie, opt => opt.MapFrom(b => b.NameMovie));
             CreateMap<SessionDTO, SessionModel>();
+            CreateMap<List<SessionModel>, List<SessionDTO>>();
+            CreateMap<List<SessionDTO>, List<SessionModel>>();
         }
 
 

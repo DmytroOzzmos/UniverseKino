@@ -34,7 +34,7 @@ namespace UniverseKino.Data.Repositories
             get
             {
                 if (movies == null)
-                    movies = new GenericRepository<Movie>(dbContext);
+                    movies = GetRepository<Movie>();
 
                 return movies;
             }
