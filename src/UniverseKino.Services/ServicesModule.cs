@@ -7,8 +7,11 @@ using Microsoft.Extensions.Logging;
 using UniverseKino.Core;
 using UniverseKino.Data;
 using UniverseKino.Data.EF;
-using UniverseKino.Services.Interfaces;
+using UniverseKino.Data.Entities;
+using UniverseKino.Data.Interfaces;
+using UniverseKino.Data.Repositories;
 using UniverseKino.Services.Services;
+using UniverseKino.Services.Interfaces;
 
 namespace UniverseKino.Services
 {
@@ -20,13 +23,21 @@ namespace UniverseKino.Services
 
             builder.RegisterModule<DataModule>();
             builder.RegisterType<AuthService>().As<IAuthService>();
-            // builder.Register(x =>
-            // new AuthService(x.Resolve<ApplicationContext>()))
-            //     .As<IAuthService>();
+            
 
             builder.RegisterType<ViewInfoService>().As<IViewInfoService>();
             builder.RegisterType<CheckService>().As<ICheckService>();
             builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
+
+            builder.Register(x => new InfoMoviesService(
+                x.Resolve<IUnitOfWorkEntities>(),
+                x.Resolve<IMapper>()))
+                .As<IInfoMoviesService>();
+
+            builder.Register(x => new SessionsInfoService(
+                x.Resolve<IUnitOfWorkEntities>(),
+                x.Resolve<IMapper>()))
+                .As<ISessionsInfoService>();
         }
 
     }

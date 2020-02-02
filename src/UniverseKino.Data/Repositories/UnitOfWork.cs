@@ -24,9 +24,9 @@ namespace UniverseKino.Data.Repositories
             this.dbContext = dbContext;
         }
 
-        private IGenericRepository<T> GetRepository<T>()  where T : BaseEntity
+        private IGenericRepository<T> GetRepository<T>() where T : BaseEntity
         {
-            return GetRepository<T>();
+            return new GenericRepository<T>(dbContext);
         }
 
         public IGenericRepository<Movie> Movies

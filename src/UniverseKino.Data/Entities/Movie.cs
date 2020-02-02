@@ -14,7 +14,7 @@ namespace UniverseKino.Data.Entities
         public string Genre { get; set; }
 
         [Required]
-        public int Duration { get; set; }
+        public int Duration { get; set; }  //stored in minutes
 
         public List<Session> Sessions { get; set; }
     }
