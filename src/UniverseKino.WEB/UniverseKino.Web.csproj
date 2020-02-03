@@ -18,6 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniverseKino.Core\UniverseKino.Core.csproj" />
+    <ProjectReference Include="..\UniverseKino.Data\UniverseKino.Data.csproj" />
     <ProjectReference Include="..\UniverseKino.Services\UniverseKino.Services.csproj" />
   </ItemGroup>
 </Project>
