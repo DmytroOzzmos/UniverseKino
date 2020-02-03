@@ -7,14 +7,14 @@ namespace UniverseKino.Data.Entities
 {
     public class Reservation : BaseEntity
     {
-        [Required]
-        public string Number { get; set; }
+        public int IdSeat { get; set; }
+        public Seat Seat { get; set; }
 
-        [Required]
         public int IdSession { get; set; }
         public Session Session { get; set; }
 
-        [Required]
-        public string UserName { get; set; }
+        public Boolean Paid { get; set; }
+        public int IdUser { get; set; }
+        public ApplicationUser UserName { get; set; }
     }
 }

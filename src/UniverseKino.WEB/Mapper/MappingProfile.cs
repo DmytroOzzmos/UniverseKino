@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using System.Collections.Generic;
+using UniverseKino.Data.Entities;
 using UniverseKino.Services;
 using UniverseKino.Services.Dto;
 using UniverseKino.WEB.Models;
@@ -20,6 +21,10 @@ namespace UniverseKino.WEB
 
             CreateMap<SessionModel, SessionDTO>();
             CreateMap<SessionDTO, SessionModel>();
+
+            //CreateMap<ReservationRequestModel, Reservation>()
+            //    .ForMember(x => x.IdSession, opt => opt.MapFrom(a => a.SessionId))
+            //    .ForMember(x => x.)
         }
 
 

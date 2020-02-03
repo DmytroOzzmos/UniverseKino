@@ -7,7 +7,8 @@ namespace UniverseKino.WEB
 {
     public class ReservationRequestModel
     {
-        public int SessionsId { get; set; }
-        public List<Place> PlacesToBook { get; set; }
+        public int Number { get; set; }
+        public int Row { get; set; }
+        public int SessionId { get; set; }
     }
 }
