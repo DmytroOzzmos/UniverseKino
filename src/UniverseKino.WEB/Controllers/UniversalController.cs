@@ -27,6 +27,7 @@ namespace UniverseKino.WEB.Controllers
         [HttpPost("reservation")]
         public IActionResult ToBook([FromBody] ReservationRequestModel reservation)
         {
+            //_context.SaveChanges();
             var user = _context.GetUserFromToken(User);
 
             var session = _context.Sessions.Where(x => x.Id == reservation.SessionId).FirstOrDefault();
