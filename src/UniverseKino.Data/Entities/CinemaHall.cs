@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
@@ -10,11 +8,10 @@ namespace UniverseKino.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public int Number { get; set; }
 
-        public List<Seat> Seats { get; set; }
+        public virtual ICollection<Seat> Seats { get; set; }
 
-        public List<Session> Sessions { get; set; }
+        public virtual ICollection<Session> Sessions { get; set; }
     }
 }

@@ -11,18 +11,15 @@ namespace UniverseKino.Data.Entities
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Seat")]
         public int SeatId { get; set; }
-        public Seat Seat { get; set; }
+        public virtual Seat Seat { get; set; }
 
-        [ForeignKey("Session")]
         public int SessionId { get; set; }
-        public Session Session { get; set; }
+        public virtual Session Session { get; set; }
 
         public Boolean Paid { get; set; }
 
-        [ForeignKey("UserName")]
         public int UserId { get; set; }
-        public ApplicationUser UserName { get; set; }
+        public virtual ApplicationUser UserName { get; set; }
     }
 }

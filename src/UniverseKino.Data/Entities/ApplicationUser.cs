@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
@@ -17,7 +15,8 @@ namespace UniverseKino.Data.Entities
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public DateTime DOB { get; set; }
 
-        public List<Reservation> Reservations { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }
