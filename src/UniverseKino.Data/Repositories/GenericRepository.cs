@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniverseKino.Data.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         private readonly UniverseKinoContext dbContext;
 
@@ -45,7 +45,8 @@ namespace UniverseKino.Data.Repositories
 
         public TEntity GetById(int id)
         {
-            var entity = Entities.Where(x => x.Id == id).FirstOrDefault();
+            //var entity = Entities.Where(x => x.Id == id).FirstOrDefault();
+            var entity = Entities.Find(id);
 
             return entity;
         }

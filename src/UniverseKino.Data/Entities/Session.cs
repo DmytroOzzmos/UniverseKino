@@ -6,8 +6,11 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class Session : BaseEntity
+    public class Session 
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public DateTime Date { get; set; }
 

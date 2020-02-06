@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class ApplicationUser  : BaseEntity
+    public class ApplicationUser
     {
+        [Key]
+        public int Id { get; set; }
+
         public string Email { get; set; }
         public string Role { get; set; }
         public string FirstName { get; set; }

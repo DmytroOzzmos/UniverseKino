@@ -6,8 +6,11 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class Seat : BaseEntity
+    public class Seat 
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         [ForeignKey("CinemaHall")]
         public int IdCinemaHall { get; set; }

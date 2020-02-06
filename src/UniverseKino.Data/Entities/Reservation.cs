@@ -6,8 +6,11 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class Reservation : BaseEntity
+    public class Reservation
     {
+        [Key]
+        public int Id { get; set; }
+
         [ForeignKey("Seat")]
         public int SeatId { get; set; }
         public Seat Seat { get; set; }
@@ -17,6 +20,8 @@ namespace UniverseKino.Data.Entities
         public Session Session { get; set; }
 
         public Boolean Paid { get; set; }
+
+        [ForeignKey("UserName")]
         public int UserId { get; set; }
         public ApplicationUser UserName { get; set; }
     }

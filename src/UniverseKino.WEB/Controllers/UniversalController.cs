@@ -28,26 +28,26 @@ namespace UniverseKino.WEB.Controllers
         public IActionResult ToBook([FromBody] ReservationRequestModel reservation)
         {
             //_context.SaveChanges();
-            var user = _context.GetUserFromToken(User);
+            //var user = _context.GetUserFromToken(User);
 
-            var session = _context.Sessions.Where(x => x.Id == reservation.SessionId).FirstOrDefault();
+            //var session = _context.Sessions.Where(x => x.Id == reservation.SessionId).FirstOrDefault();
 
-            var seat = session.CinemaHall.Seats.Where(x => x.Number == reservation.Number && x.Row == reservation.Row).FirstOrDefault();
+            //var seat = session.CinemaHall.Seats.Where(x => x.Number == reservation.Number && x.Row == reservation.Row).FirstOrDefault();
 
-            if (session.IsBusySeat(seat.Id))
-            {
-                return BadRequest("place already taken");
-            }
+            //if (session.IsBusySeat(seat.Id))
+            //{
+            //    return BadRequest("place already taken");
+            //}
 
-            Reservation saveReserv = new Reservation
-            {
-                SeatId = seat.Id,
-                SessionId = session.Id,
-                UserId = user.Id,
-                Paid = false
-            };
+            //Reservation saveReserv = new Reservation
+            //{
+            //    SeatId = seat.Id,
+            //    SessionId = session.Id,
+            //    UserId = user.Id,
+            //    Paid = false
+            //};
 
-            _context.Reservations.Add(saveReserv);
+            //_context.Reservations.Add(saveReserv);
 
             return Ok();
         }

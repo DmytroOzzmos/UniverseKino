@@ -5,8 +5,11 @@ using System.Text;
 
 namespace UniverseKino.Data.Entities
 {
-    public class Movie : BaseEntity
+    public class Movie
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
 
