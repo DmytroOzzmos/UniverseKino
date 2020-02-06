@@ -26,73 +26,59 @@ namespace UniverseKino.Data.EF
             //Database.EnsureCreated();
 
         }
-        // public UniverseKinoContext()
-        // {
-        //     Database.EnsureCreated();
 
-        // }
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=helloappdb5;Trusted_Connection=True;");
-        // }
+        //public UniverseKinoContext()
+        //{
+
+        //}
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=UniverseKinoDEV;Trusted_Connection=True;");
+        //}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Session>()
-            //    .HasKey(s => new { s.Id, s.MovieId, s.CinemaHallId });
-
-            //modelBuilder.Entity<Session>()
-            //    .HasOne<Movie>(s => s.Movie)
-            //    .WithMany(m => m.Sessions)
-            //    .HasForeignKey(s => s.MovieId);
-
-            //modelBuilder.Entity<Session>()
-            //    .HasOne<CinemaHall>(s => s.CinemaHall)
-            //    .WithMany(ch => ch.Sessions)
-            //    .HasForeignKey(s => s.CinemaHallId);
-
-            //modelBuilder.Entity<Reservation>()
-            //    .HasKey(r => new { r.Id });
-
-            var cinemaHall1 = new CinemaHall { Number = 1, Id = 1 };
-            var cinemaHall2 = new CinemaHall { Number = 2, Id = 2 };
-            var cinemaHall3 = new CinemaHall { Number = 3, Id = 3 };
-            var cinemaHall4 = new CinemaHall { Number = 4, Id = 4 };
+            //var cinemaHall1 = new CinemaHall { Number = 1, Id = 1 };
+            //var cinemaHall2 = new CinemaHall { Number = 2, Id = 2 };
+            //var cinemaHall3 = new CinemaHall { Number = 3, Id = 3 };
+            //var cinemaHall4 = new CinemaHall { Number = 4, Id = 4 };
 
 
-            modelBuilder.Entity<CinemaHall>().HasData(
+            //modelBuilder.Entity<CinemaHall>().HasData(
 
-                    new CinemaHall[]
-                    {
-                        cinemaHall1,
-                        cinemaHall2,
-                        cinemaHall3,
-                        cinemaHall4,
-                    }
-            );
+            //        new CinemaHall[]
+            //        {
+            //            cinemaHall1,
+            //            cinemaHall2,
+            //            cinemaHall3,
+            //            cinemaHall4,
+            //        }
+            //);
 
-            var movie1 = new Movie { Id = 1, Name = "Movie1", Genre = "FantastikaBlya", Duration = 100 };
-            var movie2 = new Movie { Id = 2, Name = "Second movie ska", Genre = "TravelYopta", Duration = 187 };
-            var movie3 = new Movie { Id = 3, Name = "LastNah", Genre = "Ujastik", Duration = 250 };
+            //var movie1 = new Movie { Id = 1, Name = "Movie1", Genre = "FantastikaBlya", Duration = 100 };
+            //var movie2 = new Movie { Id = 2, Name = "Second movie ska", Genre = "TravelYopta", Duration = 187 };
+            //var movie3 = new Movie { Id = 3, Name = "LastNah", Genre = "Ujastik", Duration = 250 };
 
-            modelBuilder.Entity<Movie>().HasData(
-                new Movie[]
-                {
-                    movie1,
-                    movie2,
-                    movie3
-                }
-            );
+            //modelBuilder.Entity<Movie>().HasData(
+            //    new Movie[]
+            //    {
+            //        movie1,
+            //        movie2,
+            //        movie3
+            //    }
+            //);
 
 
-            modelBuilder.Entity<Session>().HasData(
-                new Session[]
-                 {
-                        new Session {Id = 1, Date = GetDate(1, 9), Movie = movie1, CinemaHall = cinemaHall1 },
-                        new Session {Id = 2, Date = GetDate(3, 9), Movie = movie1, CinemaHall = cinemaHall3 },
-                        new Session {Id = 3, Date = GetDate(5, 9), Movie = movie1, CinemaHall = cinemaHall3 },
-                        new Session {Id = 4, Date = GetDate(1, 12), Movie = movie2, CinemaHall = cinemaHall1 },
-                }
-            );
+            //modelBuilder.Entity<Session>().HasData(
+            //    new Session[]
+            //     {
+            //            new Session {Id = 1, Date = GetDate(1, 9), Movie = movie1, CinemaHall = cinemaHall1 },
+            //            new Session {Id = 2, Date = GetDate(3, 9), Movie = movie1, CinemaHall = cinemaHall3 },
+            //            new Session {Id = 3, Date = GetDate(5, 9), Movie = movie1, CinemaHall = cinemaHall3 },
+            //            new Session {Id = 4, Date = GetDate(1, 12), Movie = movie2, CinemaHall = cinemaHall1 },
+            //    }
+            //);
 
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
@@ -101,7 +87,6 @@ namespace UniverseKino.Data.EF
             var date = DateTime.Parse(dateString);
             date.AddHours(hour);
             return date;
-
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)

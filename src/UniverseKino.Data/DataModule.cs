@@ -17,40 +17,40 @@ namespace UniverseKino.Data
     {
         protected void OnModelCreating(UniverseKinoContext ctx)
         {
-            InitDb init = new InitDb();
+            //InitDb init = new InitDb();
 
-            ctx.CinemaHalls.AddRange(
-                new CinemaHall[]
-                    {
-                        new CinemaHall { Number = 1, Id = 1, Seats = init.GetSeats(10, 10, 100, 1) },
-                        new CinemaHall { Number = 2, Id = 2, Seats = init.GetSeats(10, 10, 150, 2) },
-                        new CinemaHall { Number = 3, Id = 3, Seats = init.GetSeats(13, 13, 200, 3) },
-                        new CinemaHall { Number = 4, Id = 4, Seats = init.GetSeats(10, 10, 177, 4) },
-                    }
-            );
-
-
-            ctx.Movies.AddRange(
-                new Movie[]
-                {
-                    new Movie {Id = 1, Name = "Movie1", Genre = "FantastikaBlya", Duration = 100  },
-                    new Movie {Id = 2, Name = "Second movie ska", Genre = "TravelYopta", Duration = 187  },
-                    new Movie {Id = 3, Name = "LastNah", Genre = "Ujastik", Duration = 250 },
-                }
-            );
+            //ctx.CinemaHalls.AddRange(
+            //    new CinemaHall[]
+            //        {
+            //            new CinemaHall { Number = 1, Id = 1, Seats = init.GetSeats(10, 10, 100, 1) },
+            //            new CinemaHall { Number = 2, Id = 2, Seats = init.GetSeats(10, 10, 150, 2) },
+            //            new CinemaHall { Number = 3, Id = 3, Seats = init.GetSeats(13, 13, 200, 3) },
+            //            new CinemaHall { Number = 4, Id = 4, Seats = init.GetSeats(10, 10, 177, 4) },
+            //        }
+            //);
 
 
-            ctx.Sessions.AddRange(
-                new Session[]
-                 {
-                        new Session {Id = 1, Date = GetDate(1, 9), MovieId = 1, CinemaHallId = 1 },
-                        new Session {Id = 2, Date = GetDate(3, 9), MovieId = 1, CinemaHallId = 3 },
-                        new Session {Id = 3, Date = GetDate(5, 9), MovieId = 1, CinemaHallId = 3 },
-                        new Session {Id = 4, Date = GetDate(1, 12), MovieId = 2, CinemaHallId = 1 },
-                }
-            );
+            //ctx.Movies.AddRange(
+            //    new Movie[]
+            //    {
+            //        new Movie {Id = 1, Name = "Movie1", Genre = "FantastikaBlya", Duration = 100  },
+            //        new Movie {Id = 2, Name = "Second movie ska", Genre = "TravelYopta", Duration = 187  },
+            //        new Movie {Id = 3, Name = "LastNah", Genre = "Ujastik", Duration = 250 },
+            //    }
+            //);
 
-            ctx.SaveChanges();
+
+            //ctx.Sessions.AddRange(
+            //    new Session[]
+            //     {
+            //            new Session {Id = 1, Date = GetDate(1, 9), MovieId = 1, CinemaHallId = 1 },
+            //            new Session {Id = 2, Date = GetDate(3, 9), MovieId = 1, CinemaHallId = 3 },
+            //            new Session {Id = 3, Date = GetDate(5, 9), MovieId = 1, CinemaHallId = 3 },
+            //            new Session {Id = 4, Date = GetDate(1, 12), MovieId = 2, CinemaHallId = 1 },
+            //    }
+            //);
+
+            //ctx.SaveChanges();
 
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
@@ -86,6 +86,7 @@ namespace UniverseKino.Data
                     var ctx = new UniverseKinoContext(
                  new DbContextOptionsBuilder<UniverseKinoContext>()
                 .UseSqlServer(connString)
+                .UseLazyLoadingProxies()
                 .Options);
                     return ctx;
                 }
