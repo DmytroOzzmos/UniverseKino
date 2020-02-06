@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace UniverseKino.Data.Entities
@@ -10,12 +11,14 @@ namespace UniverseKino.Data.Entities
         [Required]
         public DateTime Date { get; set; }
 
-        [Required]
-        public int IdMovie { get; set; }
+        //[Required]
+        [ForeignKey("Movie")]
+        public int MovieId { get; set; }
         public Movie Movie { get; set; }
 
-        [Required]
-        public int IdCinemaHall { get; set; }
+        //[Required]
+        [ForeignKey("CinemaHall")]
+        public int CinemaHallId { get; set; }
         public CinemaHall CinemaHall { get; set; }
 
         public List<Reservation> Reservations { get; set; }

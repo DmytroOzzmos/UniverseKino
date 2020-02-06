@@ -48,7 +48,7 @@ namespace UniverseKino.Services.Services
             if (movie == null)
                 throw new Exception("Movie is not exist");
 
-            var sessions = _uow.Sessions.Find(s => s.IdMovie == idMovie).OrderBy(s => s.Date).ToList();
+            var sessions = _uow.Sessions.Find(s => s.MovieId == idMovie).OrderBy(s => s.Date).ToList();
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 

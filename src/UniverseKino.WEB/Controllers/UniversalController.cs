@@ -41,9 +41,9 @@ namespace UniverseKino.WEB.Controllers
 
             Reservation saveReserv = new Reservation
             {
-                IdSeat = seat.Id,
-                IdSession = session.Id,
-                IdUser = user.Id,
+                SeatId = seat.Id,
+                SessionId = session.Id,
+                UserId = user.Id,
                 Paid = false
             };
 

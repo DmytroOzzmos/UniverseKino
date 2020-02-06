@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace UniverseKino.Data.Entities
@@ -8,6 +9,7 @@ namespace UniverseKino.Data.Entities
     public class Seat : BaseEntity
     {
         [Required]
+        [ForeignKey("CinemaHall")]
         public int IdCinemaHall { get; set; }
         public CinemaHall CinemaHall { get; set; }
 

@@ -43,10 +43,10 @@ namespace UniverseKino.Data
             ctx.Sessions.AddRange(
                 new Session[]
                  {
-                        new Session {Id = 1, Date = GetDate(1, 9), IdMovie = 1, IdCinemaHall = 1 },
-                        new Session {Id = 2, Date = GetDate(3, 9), IdMovie = 1, IdCinemaHall = 3 },
-                        new Session {Id = 3, Date = GetDate(5, 9), IdMovie = 1, IdCinemaHall = 3 },
-                        new Session {Id = 4, Date = GetDate(1, 12), IdMovie = 2, IdCinemaHall = 1 },
+                        new Session {Id = 1, Date = GetDate(1, 9), MovieId = 1, CinemaHallId = 1 },
+                        new Session {Id = 2, Date = GetDate(3, 9), MovieId = 1, CinemaHallId = 3 },
+                        new Session {Id = 3, Date = GetDate(5, 9), MovieId = 1, CinemaHallId = 3 },
+                        new Session {Id = 4, Date = GetDate(1, 12), MovieId = 2, CinemaHallId = 1 },
                 }
             );
 

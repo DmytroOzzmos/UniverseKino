@@ -23,7 +23,7 @@ namespace UniverseKino.Data.EF
         public UniverseKinoContext(DbContextOptions<UniverseKinoContext> options)
                     : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
 
         }
         // public UniverseKinoContext()
@@ -37,10 +37,26 @@ namespace UniverseKino.Data.EF
         // }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var cinemaHall1 = new CinemaHall { Number = 1, Id = 1 };
-            var cinemaHall2 = new CinemaHall { Number = 2, Id = 2 };
-            var cinemaHall3 = new CinemaHall { Number = 3, Id = 3 };
-            var cinemaHall4 = new CinemaHall { Number = 4, Id = 4 };
+            //modelBuilder.Entity<Session>()
+            //    .HasKey(s => new { s.MovieId, s.CinemaHallId });
+
+            //modelBuilder.Entity<Session>()
+            //    .HasOne<Movie>(s => s.Movie)
+            //    .WithMany(m => m.Sessions)
+            //    .HasForeignKey(s => s.MovieId);
+
+            //modelBuilder.Entity<Session>()
+            //    .HasOne<CinemaHall>(s => s.CinemaHall)
+            //    .WithMany(ch => ch.Sessions)
+            //    .HasForeignKey(s => s.CinemaHallId);
+
+            //modelBuilder.Entity<Reservation>()
+            //    .HasKey(r => new { r.Id})
+
+            var cinemaHall1 = new CinemaHall { Number = 1 };
+            var cinemaHall2 = new CinemaHall { Number = 2 };
+            var cinemaHall3 = new CinemaHall { Number = 3 };
+            var cinemaHall4 = new CinemaHall { Number = 4 };
 
 
 
