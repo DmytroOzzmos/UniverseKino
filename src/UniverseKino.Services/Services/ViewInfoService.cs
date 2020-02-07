@@ -23,7 +23,7 @@ namespace UniverseKino.Services.Services
 
         public MovieDTO GetMovie(int id)
         {
-            var movie = _uow.Sessions.GetById(id);
+            var movie = _uow.Sessions.GetByIdAsync(id);
 
             var movies = _mapper.Map<MovieDTO>(movie);
 
@@ -32,7 +32,7 @@ namespace UniverseKino.Services.Services
 
         public List<MovieDTO> GetMovies()
         {
-            var movies = _uow.Movies.GetAll().ToList();
+            var movies = _uow.Movies.GetAllAsync().ToList();
 
             var moviesDTO = _mapper.Map<List<MovieDTO>>(movies);
 
@@ -41,7 +41,7 @@ namespace UniverseKino.Services.Services
 
         public SessionDTO GetSession(int id)
         {
-            var session = _uow.Sessions.GetById(id);
+            var session = _uow.Sessions.GetByIdAsync(id);
 
             var sessionDTO = _mapper.Map<SessionDTO>(session);
 
@@ -50,7 +50,7 @@ namespace UniverseKino.Services.Services
 
         public List<SessionDTO> GetSessions()
         {
-            var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
+            var sessions = _uow.Sessions.GetAllAsync().OrderBy(x => x.Date).ToList();
 
             var sessionDTO = _mapper.Map<List<SessionDTO>>(sessions);
 

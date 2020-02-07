@@ -24,7 +24,7 @@ namespace UniverseKino.Services.Services
 
         public bool IsExistMovie(Movie movie)
         {
-            var checkMovie = _uow.Movies.Find(x => x.Name == movie.Name
+            var checkMovie = _uow.Movies.FindAsync(x => x.Name == movie.Name
                                                 && x.Genre == movie.Genre
                                                 && x.Duration == movie.Duration).FirstOrDefault();
 

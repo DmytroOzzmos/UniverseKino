@@ -8,16 +8,16 @@ namespace UniverseKino.Data.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task CreateAsync(TEntity entity);
+        Task AddAsync(TEntity entity);
 
-        Task Update(TEntity entity);
+        Task UpdateAsync(TEntity entity);
 
-        Task Remove(int id);
+        Task RemoveAsync(int id);
 
-        Task<IEnumerable<TEntity>> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
-        Task<IEnumerable<TEntity>> Find(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> FindAsync(Func<TEntity, bool> predicate);
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetByIdAsync(int id);
     }
 }

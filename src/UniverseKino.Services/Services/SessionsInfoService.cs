@@ -22,7 +22,7 @@ namespace UniverseKino.Services.Services
 
         public List<SessionDTO> GetAllSessions()
         {
-            var sessions = _uow.Sessions.GetAll().OrderBy(x => x.Date).ToList();
+            var sessions = _uow.Sessions.GetAllAsync().OrderBy(x => x.Date).ToList();
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 
@@ -31,7 +31,7 @@ namespace UniverseKino.Services.Services
 
         public SessionDTO GetSession(int id)
         {
-            var session = _uow.Sessions.GetById(id);
+            var session = _uow.Sessions.GetByIdAsync(id);
 
             if (session == null)
                 throw new Exception("DataNotExist");
@@ -43,12 +43,12 @@ namespace UniverseKino.Services.Services
 
         public List<SessionDTO> GetSessionsByMovie(int idMovie)
         {
-            var movie = _uow.Movies.GetById(idMovie);
+            var movie = _uow.Movies.GetByIdAsync(idMovie);
 
             if (movie == null)
                 throw new Exception("Movie is not exist");
 
-            var sessions = _uow.Sessions.Find(s => s.MovieId == idMovie).OrderBy(s => s.Date).ToList();
+            var sessions = _uow.Sessions.FindAsync(s => s.MovieId == idMovie).OrderBy(s => s.Date).ToList();
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);
 

@@ -31,21 +31,21 @@ namespace UniverseKino.Services.Services
 
         public List<MovieDTO> GetAllMovies()
         {
-            var movies = _unit.Movies.GetAll();
+            var movies = _unit.Movies.GetAllAsync();
 
             return _mapper.Map<List<MovieDTO>>(movies);
         }
 
         public MovieDTO GetMovieByID(int id)
         {
-            var movie = _unit.Movies.GetById(id);
+            var movie = _unit.Movies.GetByIdAsync(id);
 
             return _mapper.Map<MovieDTO>(movie);
         }
 
         public MovieDTO GetMovieByName(string movieName)
         {
-            var movie = _unit.Movies.Find(m =>
+            var movie = _unit.Movies.FindAsync(m =>
                              m.Name.ToLower() == movieName.ToLower())
                              .FirstOrDefault();
 
@@ -59,7 +59,7 @@ namespace UniverseKino.Services.Services
 
         public List<SessionDTO> GetMoviesSessions(int id)
         {
-            var movie = _unit.Movies.GetById(id);
+            var movie = _unit.Movies.GetByIdAsync(id);
 
             var sessions = movie.Sessions.OrderBy(s => s.Date).ToList();
 

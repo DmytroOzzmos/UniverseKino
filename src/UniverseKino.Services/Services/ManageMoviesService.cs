@@ -41,14 +41,14 @@ namespace UniverseKino.Services.Services
 
         public void Remove(int id)
         {
-            var movie = _uow.Movies.GetById(id);
+            var movie = _uow.Movies.GetByIdAsync(id);
 
             if (movie == null)
             {
                 throw new Exception("IsNotExist");
             }
 
-            _uow.Movies.Remove(id);
+            _uow.Movies.RemoveAsync(id);
         }
     }
 }

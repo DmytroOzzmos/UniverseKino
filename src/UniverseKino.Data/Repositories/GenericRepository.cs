@@ -6,61 +6,60 @@ using UniverseKino.Data.Interfaces;
 using UniverseKino.Data.EF;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace UniverseKino.Data.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly UniverseKinoContext dbContext;
+        private readonly UniverseKinoContext _dbContext;
+
+        public GenericRepository(UniverseKinoContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         private DbSet<TEntity> Entities
         {
             get
             {
-                return dbContext.Set<TEntity>();
+                return _dbContext.Set<TEntity>();
             }
         }
 
-        public GenericRepository(UniverseKinoContext dbContext)
+
+        public async Task AddAsync(TEntity entity)
         {
-            this.dbContext = dbContext;
+            await Entities.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public void Add(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
-            Entities.Add(entity);
+            Entities.Update(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        public async Task RemoveAsync(int id)
         {
-            var listResult = Entities.Where(predicate);
-
-            return listResult;
+            var entity = await GetByIdAsync(id);
+            Entities.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return Entities;
+            return await Task.Run(() => Entities);
         }
 
-        public TEntity GetById(int id)
+        public async Task<IEnumerable<TEntity>> FindAsync(Func<TEntity, bool> predicate)
         {
-            //var entity = Entities.Where(x => x.Id == id).FirstOrDefault();
-            var entity = Entities.Find(id);
-
-            return entity;
+            return await Task.Run(() => Entities.Where(predicate));
         }
 
-        public void Remove(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
-            var removeEntity = GetById(id);
-
-            Entities.Remove(removeEntity);
-        }
-
-        public void Update(TEntity entity)
-        {
-            dbContext.Entry(entity).State = EntityState.Modified;
+            return await Entities.FindAsync(id);
         }
     }
 }
