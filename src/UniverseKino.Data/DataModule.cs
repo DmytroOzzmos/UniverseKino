@@ -94,6 +94,21 @@ namespace UniverseKino.Data
                 .As<UniverseKinoContext>();
             // .InstancePerDependency();
 
+            builder.RegisterType<CinemaHallRepository>()
+                .As<ICinemaHallRepository>();
+
+            builder.RegisterType<MovieRepository>()
+                .As<IMovieRepository>();
+
+            builder.RegisterType<ReservationRepository>()
+                .As<IReservationRepository>();
+
+            builder.RegisterType<SeatRepository>()
+                .As<ISeatRepository>();
+
+            builder.RegisterType<SessionRepository>()
+                .As<ISessionRepository>();
+
 
             builder.RegisterType<AuthRepository>();
             // .InstancePerDependency();
