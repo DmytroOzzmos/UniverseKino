@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
-        void Add(TEntity entity);
+        Task CreateAsync(TEntity entity);
 
-        void Update(TEntity entity);
+        Task Update(TEntity entity);
 
-        void Remove(int id);
+        Task Remove(int id);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAll();
 
-        IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
+        Task<IEnumerable<TEntity>> Find(Func<TEntity, bool> predicate);
 
-        TEntity GetById(int id);
+        Task<TEntity> GetById(int id);
     }
 }
