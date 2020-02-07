@@ -29,15 +29,21 @@ namespace UniverseKino.Services
             builder.RegisterType<CheckService>().As<ICheckService>();
             builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
 
-            builder.Register(x => new InfoMoviesService(
-                x.Resolve<IUnitOfWorkEntities>(),
-                x.Resolve<IMapper>()))
+            builder.RegisterType<InfoMoviesService>()
                 .As<IInfoMoviesService>();
 
-            builder.Register(x => new InfoSessionsService(
-                x.Resolve<IUnitOfWorkEntities>(),
-                x.Resolve<IMapper>()))
+            builder.RegisterType<InfoSessionsService>()
                 .As<IInfoSessionsService>();
+
+            //builder.Register(x => new InfoMoviesService(
+            //    x.Resolve<IUnitOfWorkEntities>(),
+            //    x.Resolve<IMapper>()))
+            //    .As<IInfoMoviesService>();
+
+            //builder.Register(x => new InfoSessionsService(
+            //    x.Resolve<IUnitOfWorkEntities>(),
+            //    x.Resolve<IMapper>()))
+            //    .As<IInfoSessionsService>();
         }
 
     }
