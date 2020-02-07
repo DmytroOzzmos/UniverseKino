@@ -5,7 +5,7 @@ using UniverseKino.Data.Entities;
 
 namespace UniverseKino.Data.Interfaces
 {
-    public interface IReservationRepositoty : IGenericRepository<Reservation>
+    public interface IMovieRepository : IGenericRepository<Movie>
     {
     }
 }
