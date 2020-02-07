@@ -1,4 +1,4 @@
-namespace UniverseKino.WEB.Models
+namespace UniverseKino.Services
 {
 
     public class TokenResponseDTO

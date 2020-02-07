@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
-using UniverseKino.WEB.Models;
 
 namespace UniverseKino.Services
 {

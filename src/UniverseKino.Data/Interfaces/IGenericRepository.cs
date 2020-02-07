@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
@@ -14,9 +15,9 @@ namespace UniverseKino.Data.Interfaces
 
         Task RemoveAsync(int id);
 
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        IQueryable<TEntity> GetAll();
 
-        Task<IEnumerable<TEntity>> FindAsync(Func<TEntity, bool> predicate);
+        IEnumerable<TEntity> FindByPredicate(Func<TEntity, bool> predicate);
 
         Task<TEntity> GetByIdAsync(int id);
     }

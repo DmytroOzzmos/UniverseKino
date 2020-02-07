@@ -18,9 +18,9 @@ namespace UniverseKino.WEB.Controllers
     {
         private IInfoMoviesService _moviesServ;
         private IMapper _mapper;
-        private readonly ISessionsInfoService _sessionsInfoService;
+        private readonly IInfoSessionsService _sessionsInfoService;
 
-        public InfoController(IInfoMoviesService moviesServ, ISessionsInfoService sessionsInfoService, IMapper mapper)
+        public InfoController(IInfoMoviesService moviesServ, IInfoSessionsService sessionsInfoService, IMapper mapper)
         {
             _moviesServ = moviesServ;
             _sessionsInfoService = sessionsInfoService;

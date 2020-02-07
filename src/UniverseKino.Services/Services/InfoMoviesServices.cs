@@ -6,60 +6,41 @@ using AutoMapper;
 using UniverseKino.Data.Entities;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Services.Dto;
+using UniverseKino.Services.Interfaces;
 
 namespace UniverseKino.Services.Services
 {
-    public interface IInfoMoviesService
+    public class InfoMoviesService : InfoGenericService<MovieDTO, Movie>, IInfoMoviesService
     {
-        MovieDTO GetMovieByID(int id);
-        MovieDTO GetMovieByName(string movieName);
-        List<SessionDTO> GetMoviesSessions(int id);
-        List<MovieDTO> GetAllMovies();
-
-
-    }
-    public class InfoMoviesService : IInfoMoviesService
-    {
-        private IUnitOfWorkEntities _unit;
-        private IMapper _mapper;
-        public InfoMoviesService(IUnitOfWorkEntities unit, IMapper mapper)
+        private readonly IMovieRepository _movieRepository;
+        public InfoMoviesService(IMovieRepository movieRepository, IMapper mapper)
+            : base(movieRepository, mapper)
         {
-            _unit = unit;
-            _mapper = mapper;
+            _movieRepository = movieRepository;
         }
 
 
-        public List<MovieDTO> GetAllMovies()
+        public async Task<MovieDTO> GetMovieByName(string movieName)
         {
-            var movies = _unit.Movies.GetAllAsync();
-
-            return _mapper.Map<List<MovieDTO>>(movies);
-        }
-
-        public MovieDTO GetMovieByID(int id)
-        {
-            var movie = _unit.Movies.GetByIdAsync(id);
-
-            return _mapper.Map<MovieDTO>(movie);
-        }
-
-        public MovieDTO GetMovieByName(string movieName)
-        {
-            var movie = _unit.Movies.FindAsync(m =>
-                             m.Name.ToLower() == movieName.ToLower())
-                             .FirstOrDefault();
+            
+            var movie = await Task.Run( () =>
+                                  _movieRepository.FindByPredicate(m =>
+                                   m.Name.ToLower() == movieName.ToLower() ));
 
             if (movie == null)
-                throw new Exception();
+                throw new Exception("Movie is not exist");
 
             var movieDTO = _mapper.Map<MovieDTO>(movie);
 
             return movieDTO;
         }
 
-        public List<SessionDTO> GetMoviesSessions(int id)
+        public async Task<List<SessionDTO>> GetMoviesSessions(int id)
         {
-            var movie = _unit.Movies.GetByIdAsync(id);
+            var movie = await _movieRepository.GetByIdAsync(id);
+
+            if (movie == null)
+                throw new Exception("Movie is not exist");
 
             var sessions = movie.Sessions.OrderBy(s => s.Date).ToList();
 
