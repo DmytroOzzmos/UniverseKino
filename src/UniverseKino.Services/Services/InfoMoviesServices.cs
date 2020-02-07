@@ -20,7 +20,7 @@ namespace UniverseKino.Services.Services
         }
 
 
-        public async Task<MovieDTO> GetMovieByName(string movieName)
+        public async Task<MovieDTO> GetMovieByNameAsync(string movieName)
         {
             
             var movie = await Task.Run( () =>
@@ -35,7 +35,7 @@ namespace UniverseKino.Services.Services
             return movieDTO;
         }
 
-        public async Task<List<SessionDTO>> GetMoviesSessions(int id)
+        public async Task<List<SessionDTO>> GetMoviesSessionsAsync(int id)
         {
             var movie = await _movieRepository.GetByIdAsync(id);
 

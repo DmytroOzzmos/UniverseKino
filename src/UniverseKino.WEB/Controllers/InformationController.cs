@@ -16,13 +16,13 @@ namespace UniverseKino.WEB.Controllers
     [ApiController]
     public class InfoController : ControllerBase
     {
-        private IInfoMoviesService _moviesServ;
-        private IMapper _mapper;
+        private readonly IInfoMoviesService _moviesInfoService;
         private readonly IInfoSessionsService _sessionsInfoService;
+        private readonly IMapper _mapper;
 
-        public InfoController(IInfoMoviesService moviesServ, IInfoSessionsService sessionsInfoService, IMapper mapper)
+        public InfoController(IInfoMoviesService moviesService, IInfoSessionsService sessionsInfoService, IMapper mapper)
         {
-            _moviesServ = moviesServ;
+            _moviesInfoService = moviesService;
             _sessionsInfoService = sessionsInfoService;
             _mapper = mapper;
         }
@@ -31,46 +31,42 @@ namespace UniverseKino.WEB.Controllers
         [HttpGet("sessions")]
         public async Task<IActionResult> GetAllSessions()
         {
-            var sessionDTO = _sessionsInfoService.GetAllSessions();
+            var sessionDTO = await Task.Run( () => _sessionsInfoService.GetAll());
 
-            var sessionModel = _mapper.Map<List<SessionModel>>(sessionDTO);
-
-            return await Task.Run(() => Ok(sessionModel));
+            return Ok(sessionDTO);
         }
 
         [HttpGet]
         [Route("sessions/{id}")]
         public async Task<IActionResult> GetSession([FromRoute] int id)
         {
-            var sessionDTO = _sessionsInfoService.GetSession(id);
+            var sessionDTO = await _sessionsInfoService.GetByIdAsync(id);
 
-            var sessionModel = _mapper.Map<SessionModel>(sessionDTO);
-
-            return await Task.Run(() => Ok(sessionDTO));
+            return Ok(sessionDTO);
         }
 
         [HttpGet("movies")]
-        public IActionResult GetAllMovies()
+        public async Task<IActionResult> GetAllMovies()
         {
-            var movies = _moviesServ.GetAllMovies();
+            var movies = await Task.Run( () => _moviesInfoService.GetAll());
 
-            return Ok(_mapper.Map<List<MovieDTO>>(movies));
+            return Ok(movies);
         }
 
         [HttpGet("movies/{id}")]
-        public IActionResult GetMovie([FromRoute] int id)
+        public async Task<IActionResult> GetMovie([FromRoute] int id)
         {
-            var movie = _moviesServ.GetMovieByID(id);
+            var movie = await _moviesInfoService.GetByIdAsync(id);
 
-            return Ok(_mapper.Map<MovieDTO>(movie));
+            return Ok(movie);
         }
 
         [HttpGet("movies/{id}/sessions")]
-        public IActionResult GetSessionsMovie([FromRoute] int id)
+        public async Task<IActionResult> GetSessionsMovie([FromRoute] int id)
         {
-            var sessions = _moviesServ.GetMoviesSessions(id);
+            var sessions = await _moviesInfoService.GetMoviesSessionsAsync(id);
 
-            return Ok(_mapper.Map<List<SessionDTO>>(sessions));
+            return Ok(sessions);
         }
     }
 }

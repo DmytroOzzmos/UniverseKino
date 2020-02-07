@@ -9,7 +9,7 @@ namespace UniverseKino.Services.Interfaces
 {
     public interface IInfoMoviesService : IInfoGenericService<MovieDTO, Movie>
     {
-        Task<MovieDTO> GetMovieByName(string movieName);
-        Task<List<SessionDTO>> GetMoviesSessions(int id);
+        Task<MovieDTO> GetMovieByNameAsync(string movieName);
+        Task<List<SessionDTO>> GetMoviesSessionsAsync(int id);
     }
 }
