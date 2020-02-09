@@ -6,49 +6,51 @@ using UniverseKino.Data.Entities;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace UniverseKino.Services.Services
 {
     public class ManageMoviesService : IManageMoviesService
     {
-        private readonly IUnitOfWorkEntities _uow;
+        private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
         private readonly ICheckService _check;
 
-        public ManageMoviesService(IUnitOfWorkEntities uow, IMapper mapper, ICheckService check)
+        public ManageMoviesService(IMovieRepository movieRepository, IMapper mapper, ICheckService check)
         {
-            _uow = uow;
+            _movieRepository = movieRepository;
             _mapper = mapper;
             _check = check;
         }
 
-        public void Add(MovieDTO newMovie)
+        public async Task AddAsync(MovieDTO newMovie)
         {
             var movie = _mapper.Map<Movie>(newMovie);
 
-            if (!_check.ValidationMovie(movie))
+            if (!IsExistMovie(movie))
             {
-                throw new Exception("Invalid data");
+                throw new Exception("Movie already exists");
             }
 
-            _uow.Movies.Add(movie);
-
-            if (!_check.IsExistMovie(movie))
-            {
-                throw new Exception("Failed to add movie");
-            }
+            await _movieRepository.AddAsync(movie);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var movie = _uow.Movies.GetByIdAsync(id);
+            var movie = await _movieRepository.GetByIdAsync(id);
 
-            if (movie == null)
-            {
-                throw new Exception("IsNotExist");
-            }
+            if (movie != null)
+                await _movieRepository.RemoveAsync(id);
+        }
 
-            _uow.Movies.RemoveAsync(id);
+        private bool IsExistMovie(Movie movie)
+        {
+            var checkMovie = _movieRepository.FindByPredicate(x => x.Name == movie.Name
+                                                && x.Genre == movie.Genre
+                                                && x.Duration == movie.Duration).FirstOrDefault();
+
+            return checkMovie != null;
         }
     }
 }

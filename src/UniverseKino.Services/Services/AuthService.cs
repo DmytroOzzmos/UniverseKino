@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using UniverseKino.Data.EF;
 using UniverseKino.Data.Entities;
-using UniverseKino.WEB.Models;
 using System;
 using AutoMapper;
 using System.IdentityModel.Tokens.Jwt;

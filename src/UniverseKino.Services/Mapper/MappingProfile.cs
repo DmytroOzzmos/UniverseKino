@@ -37,8 +37,7 @@ namespace UniverseKino.Services
                 .ForMember(a => a.NameMovie, opt => opt.MapFrom(b => b.Movie.Name))
                 .ForMember(a => a.GenreMovie, opt => opt.MapFrom(b => b.Movie.Genre))
                 .ForMember(a => a.DurationMovie, opt => opt.MapFrom(b => b.Movie.Duration))
-                .ForMember(a => a.NumberHall, opt => opt.MapFrom(b => b.CinemaHall.Number))
-                .ForMember(a => a.Seats, opt => opt.MapFrom(b => b.CinemaHall.Seats));
+                .ForMember(a => a.NumberHall, opt => opt.MapFrom(b => b.CinemaHall.Number));
         }
     }
 }

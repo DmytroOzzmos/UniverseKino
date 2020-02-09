@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,13 @@ namespace UniverseKino.WEB
 {
     public class CreateSessionRequestModel
     {
+        [Required]
         public DateTime Date { get; set; }
-        public int NumberHall { get; set; }
-        public string NameMovie { get; set; }
+
+        [Required]
+        public int HallId { get; set; }
+
+        [Required]
+        public int MovieId { get; set; }
     }
 }

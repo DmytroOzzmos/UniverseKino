@@ -19,8 +19,9 @@ namespace UniverseKino.WEB
             CreateMap<SeatModel, SeatDTO>();
             CreateMap<SeatDTO, SeatModel>();
 
-            CreateMap<SessionModel, SessionDTO>();
-            CreateMap<SessionDTO, SessionModel>();
+            CreateMap<CreateMovieRequestModel, MovieDTO>();
+
+            CreateMap<CreateSessionRequestModel, CreateSassionDTO>();
 
             //CreateMap<ReservationRequestModel, Reservation>()
             //    .ForMember(x => x.IdSession, opt => opt.MapFrom(a => a.SessionId))
