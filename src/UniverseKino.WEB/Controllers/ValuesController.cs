@@ -9,7 +9,7 @@ namespace UniverseKino.WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class ValuesController : ControllerBase
     {
         // GET api/values

@@ -15,7 +15,5 @@ namespace UniverseKino.Services.Dto
         public int DurationMovie { get; set; }
 
         public int NumberHall { get; set; }
-
-        public List<SeatDTO> Seats { get; set; }
     }
 }

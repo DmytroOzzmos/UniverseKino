@@ -15,7 +15,7 @@ namespace UniverseKino.WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class InfoController : ControllerBase
     {
         private readonly IInfoMoviesService _moviesInfoService;

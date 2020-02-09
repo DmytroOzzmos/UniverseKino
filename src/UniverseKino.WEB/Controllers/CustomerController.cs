@@ -12,7 +12,7 @@ namespace UniverseKino.WEB
     [Route("customer")]
     [ApiController]
     [Authorize]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class CustomerController : ControllerBase
     {
         [HttpPost("sessions/tobook")]

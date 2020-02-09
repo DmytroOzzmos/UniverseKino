@@ -12,7 +12,7 @@ namespace UniverseKino.WEB
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class AuthController : ControllerBase
     {
         private IAuthService _authServ;

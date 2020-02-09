@@ -16,7 +16,7 @@ namespace UniverseKino.WEB.Controllers
     [Authorize]
     [Route("api/user")]
     [ApiController]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class UniversalController : ControllerBase
     {
         private readonly UniverseKinoContext _context;

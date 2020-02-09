@@ -8,6 +8,7 @@ using UniverseKino.Data.Interfaces;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
 using System.Linq;
+using UniverseKino.Services.Exceptions;
 
 namespace UniverseKino.Services.Services
 {
@@ -57,7 +58,7 @@ namespace UniverseKino.Services.Services
 
             if (movie == null)
             {
-                throw new Exception("this movie is not exist");
+                throw new EntityIsNotExistException("this movie is not exist");
             }
         }
 
@@ -67,7 +68,7 @@ namespace UniverseKino.Services.Services
 
             if (hall == null)
             {
-                throw new Exception("this hall is not exist");
+                throw new EntityIsNotExistException("this hall is not exist");
             }
         }
 
@@ -87,7 +88,7 @@ namespace UniverseKino.Services.Services
 
             if (preSession != null && preSession.Date.AddMinutes(preSession.Movie.Duration + 10) > session.Date)
             {
-                throw new Exception("Scheduled time taken");
+                throw new InvalidScheduledException("Scheduled time taken");
             }
         }
 
@@ -103,7 +104,7 @@ namespace UniverseKino.Services.Services
 
             if (nextSession != null && session.Date.AddMinutes(movie.Duration + 10) > nextSession.Date)
             {
-                throw new Exception("Scheduled time taken");
+                throw new InvalidScheduledException("Scheduled time taken");
             }
         }
     }

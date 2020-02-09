@@ -8,6 +8,7 @@ using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
+using UniverseKino.Services.Exceptions;
 
 namespace UniverseKino.Services.Services
 {
@@ -28,7 +29,7 @@ namespace UniverseKino.Services.Services
 
             if (!IsExistMovie(movie))
             {
-                throw new Exception("Movie already exists");
+                throw new EntityAlreadyExistsException("Movie already exists");
             }
 
             await _movieRepository.AddAsync(movie);

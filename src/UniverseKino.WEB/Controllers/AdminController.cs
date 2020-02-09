@@ -14,7 +14,7 @@ namespace UniverseKino.WEB
     [Route("admin")]
     [ApiController]
     //[Authorize(Roles = "Admin")]
-    [ServiceFilter(typeof(DefaultExceptionFilter))]
+    [ServiceFilter(typeof(ExceptionFilter))]
     public class AdminController : ControllerBase
     {
         private readonly IManageMoviesService _manageMovies;

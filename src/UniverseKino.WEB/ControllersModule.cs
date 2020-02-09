@@ -35,7 +35,7 @@ namespace UniverseKino.WEB
             )
             .As<IMapper>();
 
-            builder.RegisterType<DefaultExceptionFilter>();
+            builder.RegisterType<ExceptionFilter>();
 
             builder.RegisterModule<ServicesModule>();
         }

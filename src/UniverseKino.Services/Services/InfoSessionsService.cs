@@ -8,13 +8,13 @@ using UniverseKino.Services.Interfaces;
 using System.Linq;
 using UniverseKino.Data.Entities;
 using System.Threading.Tasks;
+using UniverseKino.Services.Exceptions;
 
 namespace UniverseKino.Services.Services
 {
     public class InfoSessionsService : InfoGenericService<SessionDTO, Session>, IInfoSessionsService
     {
         private readonly ISessionRepository _sessionRepository;
-        //private readonly IMapper _mapper;
 
         public InfoSessionsService(ISessionRepository sessionRepository, IMapper mapper)
             : base(sessionRepository, mapper) 
@@ -30,7 +30,7 @@ namespace UniverseKino.Services.Services
                                              .ToList());
 
             if (sessions == null)
-                throw new Exception("Session is not exist");
+                throw new EntityIsNotExistException("Session is not exist");
 
 
             var sessionsDTO = _mapper.Map<List<SessionDTO>>(sessions);

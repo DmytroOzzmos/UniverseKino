@@ -7,12 +7,14 @@ using UniverseKino.Data.Entities;
 using UniverseKino.Data.Interfaces;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
+using UniverseKino.Services.Exceptions;
 
 namespace UniverseKino.Services.Services
 {
     public class InfoMoviesService : InfoGenericService<MovieDTO, Movie>, IInfoMoviesService
     {
         private readonly IMovieRepository _movieRepository;
+
         public InfoMoviesService(IMovieRepository movieRepository, IMapper mapper)
             : base(movieRepository, mapper)
         {
@@ -28,7 +30,7 @@ namespace UniverseKino.Services.Services
                                    m.Name.ToLower() == movieName.ToLower() ));
 
             if (movie == null)
-                throw new Exception("Movie is not exist");
+                throw new EntityIsNotExistException("Movie is not exist");
 
             var movieDTO = _mapper.Map<MovieDTO>(movie);
 
@@ -40,7 +42,7 @@ namespace UniverseKino.Services.Services
             var movie = await _movieRepository.GetByIdAsync(id);
 
             if (movie == null)
-                throw new Exception("Movie is not exist");
+                throw new EntityIsNotExistException("Movie is not exist");
 
             var sessions = movie.Sessions.OrderBy(s => s.Date).ToList();
 
