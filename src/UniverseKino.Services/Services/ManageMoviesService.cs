@@ -15,13 +15,11 @@ namespace UniverseKino.Services.Services
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
-        private readonly ICheckService _check;
 
-        public ManageMoviesService(IMovieRepository movieRepository, IMapper mapper, ICheckService check)
+        public ManageMoviesService(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
-            _check = check;
         }
 
         public async Task AddAsync(MovieDTO newMovie)

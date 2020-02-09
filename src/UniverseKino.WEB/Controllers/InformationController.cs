@@ -9,11 +9,13 @@ using UniverseKino.Services.Services;
 using UniverseKino.Services.Interfaces;
 using UniverseKino.WEB.Models;
 using UniverseKino.Services;
+using UniverseKino.WEB.Filters;
 
 namespace UniverseKino.WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(DefaultExceptionFilter))]
     public class InfoController : ControllerBase
     {
         private readonly IInfoMoviesService _moviesInfoService;

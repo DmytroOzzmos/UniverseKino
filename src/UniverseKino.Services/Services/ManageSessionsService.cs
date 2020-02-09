@@ -26,7 +26,7 @@ namespace UniverseKino.Services.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(CreateSassionDTO newSession)
+        public async Task AddAsync(CreateSessionDTO newSession)
         {
             var session = _mapper.Map<Session>(newSession);
 

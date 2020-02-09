@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UniverseKino.WEB.Filters;
 
 namespace UniverseKino.WEB
 {
     [Route("customer")]
     [ApiController]
     [Authorize]
+    [ServiceFilter(typeof(DefaultExceptionFilter))]
     public class CustomerController : ControllerBase
     {
         [HttpPost("sessions/tobook")]

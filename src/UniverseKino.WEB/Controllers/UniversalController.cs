@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Data.EF;
 using UniverseKino.Data.Entities;
+using UniverseKino.WEB.Filters;
 using UniverseKino.WEB.Services;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,6 +16,7 @@ namespace UniverseKino.WEB.Controllers
     [Authorize]
     [Route("api/user")]
     [ApiController]
+    [ServiceFilter(typeof(DefaultExceptionFilter))]
     public class UniversalController : ControllerBase
     {
         private readonly UniverseKinoContext _context;

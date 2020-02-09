@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Services;
+using UniverseKino.WEB.Filters;
 using UniverseKino.WEB.Models;
 
 namespace UniverseKino.WEB
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ServiceFilter(typeof(DefaultExceptionFilter))]
     public class AuthController : ControllerBase
     {
         private IAuthService _authServ;

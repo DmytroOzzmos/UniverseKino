@@ -25,25 +25,17 @@ namespace UniverseKino.Services
             builder.RegisterType<AuthService>().As<IAuthService>();
             
 
-            builder.RegisterType<ViewInfoService>().As<IViewInfoService>();
-            builder.RegisterType<CheckService>().As<ICheckService>();
-            builder.RegisterType<ManageMoviesService>().As<IManageMoviesService>();
-
             builder.RegisterType<InfoMoviesService>()
                 .As<IInfoMoviesService>();
 
             builder.RegisterType<InfoSessionsService>()
                 .As<IInfoSessionsService>();
 
-            //builder.Register(x => new InfoMoviesService(
-            //    x.Resolve<IUnitOfWorkEntities>(),
-            //    x.Resolve<IMapper>()))
-            //    .As<IInfoMoviesService>();
+            builder.RegisterType<ManageMoviesService>()
+                .As<IManageMoviesService>();
 
-            //builder.Register(x => new InfoSessionsService(
-            //    x.Resolve<IUnitOfWorkEntities>(),
-            //    x.Resolve<IMapper>()))
-            //    .As<IInfoSessionsService>();
+            builder.RegisterType<ManageSessionsService>()
+                .As<IManageSessionsService>();
         }
 
     }

@@ -9,7 +9,7 @@ namespace UniverseKino.Services.Interfaces
 {
     public interface IManageSessionsService
     {
-        Task AddAsync(CreateSassionDTO newSession);
+        Task AddAsync(CreateSessionDTO newSession);
         Task RemoveAsync(int id);
     }
 }

@@ -9,6 +9,7 @@ using UniverseKino.Services;
 using UniverseKino.WEB.Models;
 using UniverseKino.WEB;
 using UniverseKino.Services.Services;
+using UniverseKino.WEB.Filters;
 
 namespace UniverseKino.WEB
 {
@@ -33,6 +34,8 @@ namespace UniverseKino.WEB
                         ).CreateMapper()
             )
             .As<IMapper>();
+
+            builder.RegisterType<DefaultExceptionFilter>();
 
             builder.RegisterModule<ServicesModule>();
         }

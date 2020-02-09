@@ -29,7 +29,7 @@ namespace UniverseKino.Services
             CreateMap<MovieDTO, Movie>();
             CreateMap<Movie, MovieDTO>();
 
-            CreateMap<SessionDTO, Session>();
+            CreateMap<CreateSessionDTO, Session>();
             //.ForMember(a => a.Movie, opt => opt.MapFrom(b => b.NameMovie));
 
             //CreateMap<SessionDTO, Session>();

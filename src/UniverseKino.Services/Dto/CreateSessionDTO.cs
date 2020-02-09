@@ -4,7 +4,7 @@ using System.Text;
 
 namespace UniverseKino.Services.Dto
 {
-    public class CreateSassionDTO
+    public class CreateSessionDTO
     {
         public DateTime Date { get; set; }
         public int HallId { get; set; }

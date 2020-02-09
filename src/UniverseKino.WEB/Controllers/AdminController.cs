@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniverseKino.Services.Dto;
 using UniverseKino.Services.Interfaces;
+using UniverseKino.WEB.Filters;
 
 namespace UniverseKino.WEB
 {
     [Route("admin")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [ServiceFilter(typeof(DefaultExceptionFilter))]
     public class AdminController : ControllerBase
     {
         private readonly IManageMoviesService _manageMovies;
@@ -34,7 +36,7 @@ namespace UniverseKino.WEB
                 return BadRequest(ModelState);
             }
 
-            var sessionDTO = _mapper.Map<CreateSassionDTO>(newSession);
+            var sessionDTO = _mapper.Map<CreateSessionDTO>(newSession);
 
             await _manageSessions.AddAsync(sessionDTO);
 
