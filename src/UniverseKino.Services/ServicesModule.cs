@@ -19,8 +19,6 @@ namespace UniverseKino.Services
     {
         protected override void Load(ContainerBuilder builder)
         {
-
-
             builder.RegisterModule<DataModule>();
             builder.RegisterType<AuthService>().As<IAuthService>();
             
