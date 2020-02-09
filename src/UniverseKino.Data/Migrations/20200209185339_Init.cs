@@ -139,6 +139,76 @@ namespace UniverseKino.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "CinemaHalls",
+                columns: new[] { "Id", "Number" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Movies",
+                columns: new[] { "Id", "Duration", "Genre", "Name" },
+                values: new object[,]
+                {
+                    { 1, 182, "Action, superhero, adventure, science fiction, fantasy", "Avengers" },
+                    { 2, 131, "Crime, drama, mysticism", "Knives" },
+                    { 3, 124, "Action, comedy, crime", "Bad boys" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Seats",
+                columns: new[] { "Id", "CinemaHallId", "Cost", "IdCinemaHall", "Number", "Row" },
+                values: new object[,]
+                {
+                    { 18, null, 150m, 1, 1, 6 },
+                    { 19, null, 150m, 1, 1, 7 },
+                    { 20, null, 150m, 1, 1, 8 },
+                    { 21, null, 150m, 1, 1, 9 },
+                    { 22, null, 150m, 1, 1, 10 },
+                    { 23, null, 200m, 1, 1, 1 },
+                    { 26, null, 200m, 1, 1, 4 },
+                    { 25, null, 200m, 1, 1, 3 },
+                    { 17, null, 150m, 1, 1, 5 },
+                    { 27, null, 200m, 1, 1, 5 },
+                    { 28, null, 200m, 1, 1, 6 },
+                    { 29, null, 200m, 1, 1, 7 },
+                    { 24, null, 200m, 1, 1, 2 },
+                    { 16, null, 150m, 1, 1, 4 },
+                    { 12, null, 100m, 1, 1, 5 },
+                    { 14, null, 150m, 1, 1, 2 },
+                    { 13, null, 150m, 1, 1, 1 },
+                    { 30, null, 200m, 1, 1, 8 },
+                    { 11, null, 100m, 1, 1, 4 },
+                    { 10, null, 100m, 1, 1, 3 },
+                    { 9, null, 100m, 1, 1, 2 },
+                    { 8, null, 100m, 1, 1, 1 },
+                    { 7, null, 100m, 1, 1, 7 },
+                    { 6, null, 100m, 1, 1, 6 },
+                    { 5, null, 100m, 1, 1, 5 },
+                    { 4, null, 100m, 1, 1, 4 },
+                    { 3, null, 100m, 1, 1, 3 },
+                    { 2, null, 100m, 1, 1, 2 },
+                    { 1, null, 100m, 1, 1, 1 },
+                    { 15, null, 150m, 1, 1, 3 },
+                    { 31, null, 200m, 1, 1, 9 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sessions",
+                columns: new[] { "Id", "CinemaHallId", "Date", "MovieId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(1, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 3, new DateTime(1, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 1, new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_SeatId",
                 table: "Reservations",

@@ -18,6 +18,7 @@ namespace UniverseKino.Data.Repositories
         public GenericRepository(UniverseKinoContext dbContext)
         {
             _dbContext = dbContext;
+            _entities = dbContext.Set<TEntity>();
         }
 
 
@@ -40,14 +41,14 @@ namespace UniverseKino.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<TEntity> GetAll()
+        public IEnumerable<TEntity> GetAll()
         {
-            return _entities.AsNoTracking();
+            return _entities;
         }
 
         public IEnumerable<TEntity> FindByPredicate(Func<TEntity, bool> predicate)
         {
-            return _entities.AsNoTracking().Where(predicate);
+            return _entities.Where(predicate);
         }
 
         public async Task<TEntity> GetByIdAsync(int id)

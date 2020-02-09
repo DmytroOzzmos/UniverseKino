@@ -85,7 +85,7 @@ namespace UniverseKino.Services.Services
                 .OrderBy(x => x.Date)
                 .FirstOrDefault() );
 
-            if (preSession != null && preSession.Date.AddMinutes(preSession.Movie.Duration + 10) <= session.Date)
+            if (preSession != null && preSession.Date.AddMinutes(preSession.Movie.Duration + 10) > session.Date)
             {
                 throw new Exception("Scheduled time taken");
             }
@@ -101,7 +101,7 @@ namespace UniverseKino.Services.Services
 
             var movie = await _movieRepository.GetByIdAsync(session.MovieId);
 
-            if (nextSession != null && session.Date.AddMinutes(movie.Duration + 10) <= nextSession.Date)
+            if (nextSession != null && session.Date.AddMinutes(movie.Duration + 10) > nextSession.Date)
             {
                 throw new Exception("Scheduled time taken");
             }

@@ -48,7 +48,7 @@ namespace UniverseKino.Services.Services
                                                 && x.Genre == movie.Genre
                                                 && x.Duration == movie.Duration).FirstOrDefault();
 
-            return checkMovie != null;
+            return checkMovie == null;
         }
     }
 }

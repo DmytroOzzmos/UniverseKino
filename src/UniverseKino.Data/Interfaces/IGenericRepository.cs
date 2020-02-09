@@ -15,7 +15,7 @@ namespace UniverseKino.Data.Interfaces
 
         Task RemoveAsync(int id);
 
-        IQueryable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll();
 
         IEnumerable<TEntity> FindByPredicate(Func<TEntity, bool> predicate);
 

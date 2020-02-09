@@ -44,7 +44,7 @@ namespace UniverseKino.WEB
         }
 
         [HttpDelete("sessions/{id}")]
-        public async Task<IActionResult> DeleteSessinons([FromRoute]int id)
+        public async Task<IActionResult> DeleteSessinons(int id)
         {
             await _manageSessions.RemoveAsync(id);
 

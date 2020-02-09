@@ -21,11 +21,7 @@ namespace UniverseKino.Data.EF
         public DbSet<Reservation> Reservations { get; set; }
 
         public UniverseKinoContext(DbContextOptions<UniverseKinoContext> options)
-                    : base(options)
-        {
-            //Database.EnsureCreated();
-
-        }
+                    : base(options) { }
 
         //public UniverseKinoContext()
         //{
@@ -39,46 +35,43 @@ namespace UniverseKino.Data.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //var cinemaHall1 = new CinemaHall { Number = 1, Id = 1 };
-            //var cinemaHall2 = new CinemaHall { Number = 2, Id = 2 };
-            //var cinemaHall3 = new CinemaHall { Number = 3, Id = 3 };
-            //var cinemaHall4 = new CinemaHall { Number = 4, Id = 4 };
+            modelBuilder.Entity<CinemaHall>().HasData(
+                    new CinemaHall[]
+                    {
+                        new CinemaHall { Number = 1, Id = 1 },
+                        new CinemaHall { Number = 2, Id = 2 },
+                        new CinemaHall { Number = 3, Id = 3 },
+                        new CinemaHall { Number = 4, Id = 4 },
+                    });
 
+            modelBuilder.Entity<Seat>()
+                .HasData(GetSeats(10, 7, 100, 1));
 
-            //modelBuilder.Entity<CinemaHall>().HasData(
+            modelBuilder.Entity<Seat>()
+                .HasData(GetSeats(10, 5, 100, 2));
 
-            //        new CinemaHall[]
-            //        {
-            //            cinemaHall1,
-            //            cinemaHall2,
-            //            cinemaHall3,
-            //            cinemaHall4,
-            //        }
-            //);
+            modelBuilder.Entity<Seat>()
+                .HasData(GetSeats(10, 10, 150, 3));
 
-            //var movie1 = new Movie { Id = 1, Name = "Movie1", Genre = "FantastikaBlya", Duration = 100 };
-            //var movie2 = new Movie { Id = 2, Name = "Second movie ska", Genre = "TravelYopta", Duration = 187 };
-            //var movie3 = new Movie { Id = 3, Name = "LastNah", Genre = "Ujastik", Duration = 250 };
+            modelBuilder.Entity<Seat>()
+                .HasData(GetSeats(12, 9, 200, 4));
 
-            //modelBuilder.Entity<Movie>().HasData(
-            //    new Movie[]
-            //    {
-            //        movie1,
-            //        movie2,
-            //        movie3
-            //    }
-            //);
+            modelBuilder.Entity<Movie>().HasData(
+                new Movie[]
+                {
+                    new Movie {Id = 1, Name = "Avengers", Genre = "Action, superhero, adventure, science fiction, fantasy", Duration = 182  },
+                    new Movie {Id = 2, Name = "Knives", Genre = "Crime, drama, mysticism", Duration = 131  },
+                    new Movie {Id = 3, Name = "Bad boys", Genre = "Action, comedy, crime", Duration = 124 },
+                });
 
-
-            //modelBuilder.Entity<Session>().HasData(
-            //    new Session[]
-            //     {
-            //            new Session {Id = 1, Date = GetDate(1, 9), Movie = movie1, CinemaHall = cinemaHall1 },
-            //            new Session {Id = 2, Date = GetDate(3, 9), Movie = movie1, CinemaHall = cinemaHall3 },
-            //            new Session {Id = 3, Date = GetDate(5, 9), Movie = movie1, CinemaHall = cinemaHall3 },
-            //            new Session {Id = 4, Date = GetDate(1, 12), Movie = movie2, CinemaHall = cinemaHall1 },
-            //    }
-            //);
+            modelBuilder.Entity<Session>().HasData(
+                new Session[]
+                 {
+                        new Session {Id = 1, Date = GetDate(1, 9), MovieId = 1, CinemaHallId = 1 },
+                        new Session {Id = 2, Date = GetDate(3, 9), MovieId = 1, CinemaHallId = 3 },
+                        new Session {Id = 3, Date = GetDate(5, 9), MovieId = 1, CinemaHallId = 3 },
+                        new Session {Id = 4, Date = GetDate(1, 12), MovieId = 2, CinemaHallId = 1 },
+                });
 
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
@@ -89,10 +82,22 @@ namespace UniverseKino.Data.EF
             return date;
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    var init = new InitDb(modelBuilder);
-        //    init.InitCinemaHall();
-        //}
+        private int seatId = 0;
+
+        private IEnumerable<Seat> GetSeats(int countPlace, int numberRow, decimal cost, int cinemaId)
+        {
+            var list = new List<Seat>();
+
+            for (int i = 1; i <= countPlace; i++)
+            {
+                for (int j = 1; i <= numberRow; i++)
+                {
+                    seatId++;
+                    list.Add(new Seat { Id = seatId, Cost = cost, IdCinemaHall = 1, Number = j, Row = i });
+                }
+            }
+
+            return list;
+        }
     }
 }
