@@ -82,7 +82,7 @@ namespace UniverseKino.Services.Services
         {
             var preSession = await Task.Run( () => _sessionRepository
                 .FindByPredicate(x => 
-                    x.Date <= session.Date)
+                    x.Date <= session.Date && x.CinemaHallId == session.CinemaHallId)
                 .OrderBy(x => x.Date)
                 .FirstOrDefault() );
 
@@ -96,7 +96,7 @@ namespace UniverseKino.Services.Services
         {
             var nextSession = await Task.Run( () => _sessionRepository
                 .FindByPredicate(x =>
-                    x.Date >= session.Date)
+                    x.Date >= session.Date && x.CinemaHallId == session.CinemaHallId)
                 .OrderBy(x => x.Date)
                 .FirstOrDefault() );
 
