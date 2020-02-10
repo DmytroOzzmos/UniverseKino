@@ -40,11 +40,6 @@ namespace UniverseKino.WEB
 
             var token = await _authService.Register(RegisterServiceDTO);
 
-            if (token == null)
-            {
-                return BadRequest();
-            }
-
             return Ok(token);
         }
 
@@ -54,11 +49,6 @@ namespace UniverseKino.WEB
         {
             var serviceModel = _mapper.Map<RegistrationRequestDTO>(data);
             var token = await _authService.Authenticate(serviceModel);
-
-            if (token == null)
-            {
-                return BadRequest();
-            }
 
             return Ok(token);
         }

@@ -12,6 +12,14 @@ namespace UniverseKino.WEB.Filters
         {
             switch (context.Exception)
             {
+                case InvalidAuthenticateException e:
+                    {
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                        var errorMessage = e.Message;
+                        await context.HttpContext.Response.WriteAsync(errorMessage);
+                        break;
+                    }
+
                 case EntityIsNotExistException e:
                     {
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;

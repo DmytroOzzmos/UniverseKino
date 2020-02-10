@@ -56,7 +56,7 @@ namespace UniverseKino.Services
 
             if (user == null)
             {
-                throw new Exception();
+                throw new InvalidAuthenticateException("Wrong login or password");
             }
 
             var tokenDescriptor = GetTokenDescriptor(user);
