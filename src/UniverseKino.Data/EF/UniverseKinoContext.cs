@@ -67,9 +67,7 @@ namespace UniverseKino.Data.EF
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
         {
-            var dateString = (new DateTime()).AddDays(day).ToShortDateString();
-            var date = DateTime.Parse(dateString);
-            date.AddHours(hour);
+            var date = DateTime.Now.AddDays(day).AddHours(hour);
             return date;
         }
 

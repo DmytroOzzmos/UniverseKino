@@ -203,10 +203,10 @@ namespace UniverseKino.Data.Migrations
                 columns: new[] { "Id", "CinemaHallId", "Date", "MovieId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(1, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 3, new DateTime(1, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 1, new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                    { 1, 1, new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 2, 3, new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 3, 3, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
+                    { 4, 1, new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
                 });
 
             migrationBuilder.CreateIndex(

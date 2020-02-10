@@ -10,7 +10,7 @@ using UniverseKino.Data.EF;
 namespace UniverseKino.Data.Migrations
 {
     [DbContext(typeof(UniverseKinoContext))]
-    [Migration("20200209185339_Init")]
+    [Migration("20200210053205_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -478,28 +478,28 @@ namespace UniverseKino.Data.Migrations
                         {
                             Id = 1,
                             CinemaHallId = 1,
-                            Date = new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 2,
                             CinemaHallId = 3,
-                            Date = new DateTime(1, 1, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 3,
                             CinemaHallId = 3,
-                            Date = new DateTime(1, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 4,
                             CinemaHallId = 1,
-                            Date = new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             MovieId = 2
                         });
                 });
