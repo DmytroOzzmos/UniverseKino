@@ -85,7 +85,7 @@ namespace UniverseKino.Tests
         }
 
         [Fact]
-        public async Task GetMovieByNameAsync_NotExist_EntityIsNotExistException()
+        public async void GetMovieByNameAsync_NotExist_EntityIsNotExistException()
         {
             var repMock = new Mock<IMovieRepository>();
             var mapper = new MapperConfiguration(mc => mc.AddProfile(new ServicesMappingProfile())).CreateMapper();
@@ -97,6 +97,31 @@ namespace UniverseKino.Tests
                 .Returns(new List<Movie>());
 
             await Assert.ThrowsAsync<EntityIsNotExistException>( () => movieService.GetMovieByNameAsync(movie.Name));
+        }
+
+        [Fact]
+        public async void GetMoviesSessionsAsync_Mapping_ListSessionDTO()
+        {
+            var movie = this.movie;
+
+            var session = new Session { Id = 1, CinemaHallId = 1, MovieId = 1, Date = new DateTime(2020, 2, 13) };
+
+            movie.Sessions = new List<Session> { session };
+
+            var listMovies = new List<Movie> { movie };
+
+            var repMock = new Mock<IMovieRepository>();
+            var mapper = new MapperConfiguration(mc => mc.AddProfile(new ServicesMappingProfile())).CreateMapper();
+
+            var movieService = new InfoMoviesService(repMock.Object, mapper);
+
+            repMock
+                .Setup(x => x.GetByIdAsync(It.IsAny<int>()))
+                .Returns(Task.Run( () => movie));
+
+            var resultSession = await movieService.GetMoviesSessionsAsync(movie.Id);
+
+            Assert.True(session.Date == resultSession[0].Date);
         }
     }
 }
