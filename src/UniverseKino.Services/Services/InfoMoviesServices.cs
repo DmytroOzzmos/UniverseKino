@@ -24,10 +24,11 @@ namespace UniverseKino.Services.Services
 
         public async Task<MovieDTO> GetMovieByNameAsync(string movieName)
         {
-            
+            throw new EntityIsNotExistException("Movie is not exist");
             var movie = await Task.Run( () =>
                                   _movieRepository.FindByPredicate(m =>
-                                   m.Name.ToLower() == movieName.ToLower() ));
+                                   m.Name.ToLower() == movieName.ToLower())
+                                  .FirstOrDefault());
 
             if (movie == null)
                 throw new EntityIsNotExistException("Movie is not exist");
