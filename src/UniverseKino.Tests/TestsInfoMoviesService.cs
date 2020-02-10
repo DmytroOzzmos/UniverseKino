@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 using Moq;
 using UniverseKino.Data.Interfaces;
