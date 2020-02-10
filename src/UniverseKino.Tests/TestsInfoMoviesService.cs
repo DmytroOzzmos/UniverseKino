@@ -85,8 +85,7 @@ namespace UniverseKino.Tests
         }
 
         [Fact]
-        []
-        public void GetMovieByNameAsync_NotExist_EntityIsNotExistException()
+        public async Task GetMovieByNameAsync_NotExist_EntityIsNotExistException()
         {
             var repMock = new Mock<IMovieRepository>();
             var mapper = new MapperConfiguration(mc => mc.AddProfile(new ServicesMappingProfile())).CreateMapper();
@@ -95,11 +94,9 @@ namespace UniverseKino.Tests
 
             repMock
                 .Setup(x => x.FindByPredicate(It.IsAny<Func<Movie, bool>>()))
-                .Returns(new List<Movie> { movie });
+                .Returns(new List<Movie>());
 
-            Action actual = async () => await movieService.GetMovieByNameAsync(movie.Name);
-
-            Assert.Throws<EntityIsNotExistException>(actual);
+            await Assert.ThrowsAsync<EntityIsNotExistException>( () => movieService.GetMovieByNameAsync(movie.Name));
         }
     }
 }
