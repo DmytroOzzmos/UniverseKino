@@ -15,24 +15,30 @@ namespace UniverseKino.WEB
     [ServiceFilter(typeof(ExceptionFilter))]
     public class AuthController : ControllerBase
     {
-        private IAuthService _authServ;
+        private IAuthService _authService;
         private IMapper _mapper;
-        public AuthController(IAuthService authServ, IMapper mapper)
+        public AuthController(IAuthService authService, IMapper mapper)
         {
-            _authServ = authServ;
-
+            _authService = authService;
             _mapper = mapper;
         }
+
         [HttpGet]
         [Route("users")]
-        public IActionResult AllUsers() => Ok(_authServ.AllUsers());
+        public IActionResult AllUsers() => Ok(_authService.AllUsers());
 
         [HttpPost]
         [Route("Registration")]
         public async Task<IActionResult> Registration([FromBody] RegistrationRequestView data)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var RegisterServiceDTO = _mapper.Map<RegistrationRequestDTO>(data);
-            var token = await _authServ.Register(RegisterServiceDTO);
+
+            var token = await _authService.Register(RegisterServiceDTO);
 
             if (token == null)
             {
@@ -46,8 +52,8 @@ namespace UniverseKino.WEB
         [Route("Authenticate")]
         public async Task<IActionResult> Authenticate(LoginRequestView data)
         {
-            var serviceModel = _mapper.Map<LoginRequestDTO>(data);
-            var token = await _authServ.Authenticate(serviceModel);
+            var serviceModel = _mapper.Map<RegistrationRequestDTO>(data);
+            var token = await _authService.Authenticate(serviceModel);
 
             if (token == null)
             {

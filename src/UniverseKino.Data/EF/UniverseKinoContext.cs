@@ -64,6 +64,20 @@ namespace UniverseKino.Data.EF
                         new Session {Id = 4, Date = GetDate(1, 12), MovieId = 2, CinemaHallId = 1 },
                 });
 
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser
+                {
+                    Id = 1,
+                    Email = "vampir@gmail.com",
+                    Password = "10000.YtluDYCFuMVvIfbGlph5wQ==.ScjIgCaNq6qA5oNP0AbcKK/LsREaE9uJHL4QAxVIUJk=",
+                    FirstName = "Dima",
+                    LastName = "Ozimai",
+                    Username = "Ozzmos",
+                    Role = "Admin",
+                    DOB = new DateTime(2000, 9, 16),
+                    PhoneNumber = "+380992413442"
+                });
+
         }
         private static DateTime GetDate(int day = 0, int hour = 8)
         {

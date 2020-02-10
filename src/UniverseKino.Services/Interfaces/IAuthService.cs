@@ -2,18 +2,15 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using UniverseKino.Data.Entities;
+using UniverseKino.Services.Dto;
 
 namespace UniverseKino.Services
 {
     public interface IAuthService
     {
         Task<TokenResponseDTO> Register(RegistrationRequestDTO data);
-        Task<TokenResponseDTO> Authenticate(LoginRequestDTO data);
+        Task<TokenResponseDTO> Authenticate(RegistrationRequestDTO data);
 
-        List<dynamic> AllUsers();
-        IEnumerable<ApplicationUser> GetAll();
-        // Task<OperationDetails> Create(UserDTO userDto);
-        // Task<ClaimsIdentity> Authenticate(UserDTO userDto);
-        // Task SetInitialData(UserDTO adminDto, List<string> roles);
+        List<UserDTO> AllUsers();
     }
 }

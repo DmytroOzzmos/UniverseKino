@@ -13,7 +13,7 @@ namespace UniverseKino.WEB
 {
     [Route("admin")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [ServiceFilter(typeof(ExceptionFilter))]
     public class AdminController : ControllerBase
     {

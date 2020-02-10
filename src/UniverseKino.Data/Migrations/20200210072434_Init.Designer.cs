@@ -10,7 +10,7 @@ using UniverseKino.Data.EF;
 namespace UniverseKino.Data.Migrations
 {
     [DbContext(typeof(UniverseKinoContext))]
-    [Migration("20200210053205_Init")]
+    [Migration("20200210072434_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,26 +32,50 @@ namespace UniverseKino.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ApplicationUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DOB = new DateTime(2000, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vampir@gmail.com",
+                            FirstName = "Dima",
+                            LastName = "Ozimai",
+                            Password = "10000.YtluDYCFuMVvIfbGlph5wQ==.ScjIgCaNq6qA5oNP0AbcKK/LsREaE9uJHL4QAxVIUJk=",
+                            PhoneNumber = "+380992413442",
+                            Role = "Admin",
+                            Username = "Ozzmos"
+                        });
                 });
 
             modelBuilder.Entity("UniverseKino.Data.Entities.CinemaHall", b =>
@@ -478,28 +502,28 @@ namespace UniverseKino.Data.Migrations
                         {
                             Id = 1,
                             CinemaHallId = 1,
-                            Date = new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 11, 18, 24, 34, 24, DateTimeKind.Local).AddTicks(7909),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 2,
                             CinemaHallId = 3,
-                            Date = new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 13, 18, 24, 34, 27, DateTimeKind.Local).AddTicks(4217),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 3,
                             CinemaHallId = 3,
-                            Date = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 15, 18, 24, 34, 27, DateTimeKind.Local).AddTicks(4274),
                             MovieId = 1
                         },
                         new
                         {
                             Id = 4,
                             CinemaHallId = 1,
-                            Date = new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Date = new DateTime(2020, 2, 11, 21, 24, 34, 27, DateTimeKind.Local).AddTicks(4280),
                             MovieId = 2
                         });
                 });

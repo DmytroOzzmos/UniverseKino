@@ -15,39 +15,43 @@ using UniverseKino.Services.Services;
 using Microsoft.Extensions.Options;
 using UniverseKino.Core;
 using UniverseKino.Data.Repositories;
+using UniverseKino.Data.Interfaces;
+using UniverseKino.Services.Exceptions;
+using UniverseKino.Services.Dto;
 
 namespace UniverseKino.Services
 {
     public class AuthService : IAuthService
     {
-        private AuthRepository _userRepo;
+        private IAuthRepository _userRepository;
         private JWTHelper _jwt;
         private IMapper _mapper;
         private SymmetricSecurityKey key;
         private JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
         private PasswordHasher _hasher;
 
-        public AuthService(AuthRepository userRepo, IOptionsMonitor<JWTHelper> jwt, PasswordHasher hasher, IMapper mapper)
+        public AuthService(IAuthRepository userRepository, IOptionsMonitor<JWTHelper> jwt, PasswordHasher hasher, IMapper mapper)
         {
             _mapper = mapper;
             _jwt = jwt.CurrentValue;
-            _userRepo = userRepo;
+            _userRepository = userRepository;
             _hasher = hasher;
             key = _jwt.GetSecretKey();
         }
-        private dynamic Convert(ApplicationUser user) => new { User = user };
-        public List<dynamic> AllUsers()
+
+        public List<UserDTO> AllUsers()
         {
-            return _userRepo.Users.ConvertAll<dynamic>(
-                new Converter<ApplicationUser, dynamic>(Convert)
-            );
+            var users = _userRepository.GetAll().ToList();
+
+            var usersDTO = _mapper.Map<List<UserDTO>>(users);
+
+            return usersDTO;
         }
 
-        public Task<TokenResponseDTO> Authenticate(LoginRequestDTO data)
+        public Task<TokenResponseDTO> Authenticate(RegistrationRequestDTO data)
         {
-
-            var user = _userRepo.Users
-                        .Where(u => u.Email == data.Email && _hasher.Check(u.Password, data.Password))
+            var user = _userRepository
+                        .FindByPredicate(u => u.Email == data.Email && _hasher.Check(u.Password, data.Password))
                         .FirstOrDefault();
 
             if (user == null)
@@ -55,47 +59,23 @@ namespace UniverseKino.Services
                 throw new Exception();
             }
 
-            // var tokenHandler = new JwtSecurityTokenHandler();
-            // var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING")); //AppSettings.GetSymmetricAuthSecretKey();
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(
-                 new Claim[] {
-                new Claim (ClaimsIdentity.DefaultNameClaimType, user.Username),
-                new Claim (ClaimsIdentity.DefaultRoleClaimType, user.Role),
-                 },
-                 "Token",
-                 ClaimsIdentity.DefaultNameClaimType,
-                 ClaimsIdentity.DefaultRoleClaimType
-                 ),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
-            };
+            var tokenDescriptor = GetTokenDescriptor(user);
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return Task.Run(() => new TokenResponseDTO { Token = tokenHandler.WriteToken(token) });
         }
 
 
-
-        public IEnumerable<ApplicationUser> GetAll()
-        {
-            return _userRepo.Users;
-        }
-
         public async Task<TokenResponseDTO> Register(RegistrationRequestDTO data)
         {
-            // var user = await Task.Run(() =>
-            // _appContext.ApplicationUsers.Where(u => u.Email == data.Email).FirstOrDefault();
-            // );
-
-            var user = _userRepo.Users
-                    .Where(u => u.Email == data.Email)
+            var user = _userRepository
+                    .FindByPredicate(u => u.Email == data.Email)
                     .FirstOrDefault();
 
             if (user != null)
             {
-                throw new Exception();
+                throw new EntityAlreadyExistsException("User already exist");
             }
 
             var newUser = _mapper.Map<ApplicationUser>(data);
@@ -103,14 +83,23 @@ namespace UniverseKino.Services
             newUser.Role = "User";
             newUser.Password = _hasher.Hash(data.Password);
 
-            var savedUser = await _userRepo.AddAsync(newUser);
+            await _userRepository.AddAsync(newUser);
 
+            var tokenDescriptor = GetTokenDescriptor(newUser);
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return new TokenResponseDTO { Token = tokenHandler.WriteToken(token) };
+        }
+
+        private SecurityTokenDescriptor GetTokenDescriptor(ApplicationUser user)
+        {
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(
                              new Claim[] {
-                new Claim (ClaimsIdentity.DefaultNameClaimType, savedUser.Username),
-                new Claim (ClaimsIdentity.DefaultRoleClaimType, savedUser.Role),
+                                new Claim (ClaimsIdentity.DefaultNameClaimType, user.Username),
+                                new Claim (ClaimsIdentity.DefaultRoleClaimType, user.Role),
                              },
                              "Token",
                              ClaimsIdentity.DefaultNameClaimType,
@@ -120,11 +109,7 @@ namespace UniverseKino.Services
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
             };
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return new TokenResponseDTO { Token = tokenHandler.WriteToken(token) };
+            return tokenDescriptor;
         }
-
-
     }
 }

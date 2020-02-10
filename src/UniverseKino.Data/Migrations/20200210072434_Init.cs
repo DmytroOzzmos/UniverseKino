@@ -13,13 +13,14 @@ namespace UniverseKino.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(nullable: true),
-                    Role = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    DOB = table.Column<DateTime>(nullable: false)
+                    Email = table.Column<string>(nullable: false),
+                    Role = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Username = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    DOB = table.Column<DateTime>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,6 +141,11 @@ namespace UniverseKino.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ApplicationUsers",
+                columns: new[] { "Id", "DOB", "Email", "FirstName", "LastName", "Password", "PhoneNumber", "Role", "Username" },
+                values: new object[] { 1, new DateTime(2000, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "vampir@gmail.com", "Dima", "Ozimai", "10000.YtluDYCFuMVvIfbGlph5wQ==.ScjIgCaNq6qA5oNP0AbcKK/LsREaE9uJHL4QAxVIUJk=", "+380992413442", "Admin", "Ozzmos" });
+
+            migrationBuilder.InsertData(
                 table: "CinemaHalls",
                 columns: new[] { "Id", "Number" },
                 values: new object[,]
@@ -171,10 +177,10 @@ namespace UniverseKino.Data.Migrations
                     { 21, null, 150m, 1, 1, 9 },
                     { 22, null, 150m, 1, 1, 10 },
                     { 23, null, 200m, 1, 1, 1 },
-                    { 26, null, 200m, 1, 1, 4 },
-                    { 25, null, 200m, 1, 1, 3 },
-                    { 17, null, 150m, 1, 1, 5 },
                     { 27, null, 200m, 1, 1, 5 },
+                    { 25, null, 200m, 1, 1, 3 },
+                    { 26, null, 200m, 1, 1, 4 },
+                    { 17, null, 150m, 1, 1, 5 },
                     { 28, null, 200m, 1, 1, 6 },
                     { 29, null, 200m, 1, 1, 7 },
                     { 24, null, 200m, 1, 1, 2 },
@@ -203,10 +209,10 @@ namespace UniverseKino.Data.Migrations
                 columns: new[] { "Id", "CinemaHallId", "Date", "MovieId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 3, new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 3, 3, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 4, 1, new DateTime(2020, 2, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 }
+                    { 1, 1, new DateTime(2020, 2, 11, 18, 24, 34, 24, DateTimeKind.Local).AddTicks(7909), 1 },
+                    { 2, 3, new DateTime(2020, 2, 13, 18, 24, 34, 27, DateTimeKind.Local).AddTicks(4217), 1 },
+                    { 3, 3, new DateTime(2020, 2, 15, 18, 24, 34, 27, DateTimeKind.Local).AddTicks(4274), 1 },
+                    { 4, 1, new DateTime(2020, 2, 11, 21, 24, 34, 27, DateTimeKind.Local).AddTicks(4280), 2 }
                 });
 
             migrationBuilder.CreateIndex(

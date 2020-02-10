@@ -14,7 +14,7 @@ namespace UniverseKino.WEB
         {
             CreateMap<RegistrationRequestView, RegistrationRequestDTO>();
 
-            CreateMap<LoginRequestView, LoginRequestDTO>();
+            CreateMap<LoginRequestView, RegistrationRequestDTO>();
 
             CreateMap<SeatModel, SeatDTO>();
             CreateMap<SeatDTO, SeatModel>();

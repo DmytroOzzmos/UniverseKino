@@ -53,7 +53,8 @@ namespace UniverseKino.Data
                 .As<ISessionRepository>();
 
 
-            builder.RegisterType<AuthRepository>();
+            builder.RegisterType<AuthRepository>()
+                .As<IAuthRepository>();
         }
 
     }
