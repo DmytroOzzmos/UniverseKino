@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper.Configuration;
+using Microsoft.OpenApi.Models;
 
 namespace UniverseKino.WEB
 {
@@ -37,6 +38,13 @@ namespace UniverseKino.WEB
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
 
             app.UseRouting();
             app.UseCors();
@@ -100,6 +108,10 @@ namespace UniverseKino.WEB
                     };
                 });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            });
         }
     }
 }
