@@ -9,81 +9,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UniverseKino.Data.Repositories
 {
-    public class UnitOfWork : IUnitOfWorkEntities, IDisposable
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private readonly UniverseKinoContext dbContext;
-
-        private IGenericRepository<Movie> movies;
-        private IGenericRepository<CinemaHall> cinemaHalls;
-        private IGenericRepository<Session> sessions;
-        private IGenericRepository<Reservation> reservations;
-        private IGenericRepository<Seat> seats;
+        private readonly UniverseKinoContext _dbContext;
+        private readonly Dictionary<Type, object> _repositoties = new Dictionary<Type, object>();
 
         public UnitOfWork(UniverseKinoContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-        private IGenericRepository<T> GetRepository<T>() where T : class
+
+        #region Repositories
+        public IAuthRepository AuthRepository => CreateRepository(() => new AuthRepository(_dbContext));
+
+        public ICinemaHallRepository CinemaHallRepository => CreateRepository(() => new CinemaHallRepository(_dbContext));
+
+        public IMovieRepository MovieRepository => CreateRepository(() => new MovieRepository(_dbContext));
+
+        public ISeatRepository SeatRepository => CreateRepository(() => new SeatRepository(_dbContext));
+
+        public ISessionRepository SessionRepository => CreateRepository(() => new SessionRepository(_dbContext));
+        #endregion
+
+        private T CreateRepository<T>(Func<T> createRepository) where T : class
         {
-            return new GenericRepository<T>(dbContext);
+            var typeRepository = typeof(T);
+            if (_repositoties.ContainsKey(typeRepository))
+                return _repositoties[typeRepository] as T;
+
+            var result = createRepository();
+
+            _repositoties.Add(typeRepository, result);
+            return result;
         }
 
-        public IGenericRepository<Movie> Movies
-        {
-            get
-            {
-                if (movies == null)
-                    movies = GetRepository<Movie>();
-
-                return movies;
-            }
-        }
-
-        public IGenericRepository<CinemaHall> CinemaHalls
-        {
-            get
-            {
-                if (cinemaHalls == null)
-                    cinemaHalls = GetRepository<CinemaHall>();
-
-                return cinemaHalls;
-            }
-        }
-
-        public IGenericRepository<Seat> Seats
-        {
-            get
-            {
-                if (seats == null)
-                    seats = GetRepository<Seat>();
-
-                return seats;
-            }
-        }
-
-        public IGenericRepository<Session> Sessions
-        {
-            get
-            {
-                if (sessions == null)
-                    sessions = GetRepository<Session>();
-
-                return sessions;
-            }
-        }
-
-        public IGenericRepository<Reservation> Reservations
-        {
-            get
-            {
-                if (reservations == null)
-                    reservations = GetRepository<Reservation>();
-
-                return reservations;
-            }
-        }
-
+        #region Dispose
         public void Dispose()
         {
             Dispose(true);
@@ -98,15 +59,21 @@ namespace UniverseKino.Data.Repositories
             {
                 if (disposing)
                 {
-                    dbContext.Dispose();
+                    _dbContext.Dispose();
                 }
                 disposed = true;
             }
         }
+        #endregion
 
         public void Save()
         {
-            dbContext.SaveChanges();
+            _dbContext.SaveChanges();
+        }
+
+        public async Task SaveAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
